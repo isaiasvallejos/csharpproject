@@ -28,9 +28,10 @@ namespace Market.DAO
         {
             MarketContext db = new MarketContext();
 
-            return db.Products.ToList();
-
-            //return db.Products.ToList();
+            return db.Products
+                    .Include("Category")
+                    .OrderBy(product => product.Name)
+                    .ToList();
         }
 
     }

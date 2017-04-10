@@ -35,6 +35,7 @@
             this.LabelOr = new System.Windows.Forms.Label();
             this.ListViewProducts = new System.Windows.Forms.ListView();
             this.TextBoxSearch = new System.Windows.Forms.TextBox();
+            this.PanelProducts = new System.Windows.Forms.Panel();
             this.PanelLoginOrSignUp.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             this.PanelLoginOrSignUp.Controls.Add(this.ButtonSignUpOpen);
             this.PanelLoginOrSignUp.Controls.Add(this.ButtonLoginOpen);
             this.PanelLoginOrSignUp.Controls.Add(this.LabelOr);
-            this.PanelLoginOrSignUp.Location = new System.Drawing.Point(189, 277);
+            this.PanelLoginOrSignUp.Location = new System.Drawing.Point(184, 312);
             this.PanelLoginOrSignUp.Name = "PanelLoginOrSignUp";
             this.PanelLoginOrSignUp.Size = new System.Drawing.Size(170, 26);
             this.PanelLoginOrSignUp.TabIndex = 4;
@@ -80,14 +81,14 @@
             // ListViewProducts
             // 
             this.ListViewProducts.Alignment = System.Windows.Forms.ListViewAlignment.Default;
-            this.ListViewProducts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ListViewProducts.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ListViewProducts.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ListViewProducts.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ListViewProducts.Location = new System.Drawing.Point(12, 80);
+            this.ListViewProducts.Location = new System.Drawing.Point(12, 261);
             this.ListViewProducts.MultiSelect = false;
             this.ListViewProducts.Name = "ListViewProducts";
             this.ListViewProducts.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ListViewProducts.Size = new System.Drawing.Size(340, 191);
+            this.ListViewProducts.Size = new System.Drawing.Size(340, 10);
             this.ListViewProducts.TabIndex = 5;
             this.ListViewProducts.TileSize = new System.Drawing.Size(160, 30);
             this.ListViewProducts.UseCompatibleStateImageBehavior = false;
@@ -95,17 +96,26 @@
             // 
             // TextBoxSearch
             // 
-            this.TextBoxSearch.Location = new System.Drawing.Point(12, 54);
+            this.TextBoxSearch.Location = new System.Drawing.Point(12, 51);
             this.TextBoxSearch.Name = "TextBoxSearch";
-            this.TextBoxSearch.Size = new System.Drawing.Size(340, 20);
+            this.TextBoxSearch.Size = new System.Drawing.Size(335, 20);
             this.TextBoxSearch.TabIndex = 6;
             this.TextBoxSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxSearch_KeyUp);
+            // 
+            // PanelProducts
+            // 
+            this.PanelProducts.AutoScroll = true;
+            this.PanelProducts.Location = new System.Drawing.Point(12, 81);
+            this.PanelProducts.Name = "PanelProducts";
+            this.PanelProducts.Size = new System.Drawing.Size(355, 224);
+            this.PanelProducts.TabIndex = 7;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(364, 311);
+            this.ClientSize = new System.Drawing.Size(385, 350);
+            this.Controls.Add(this.PanelProducts);
             this.Controls.Add(this.TextBoxSearch);
             this.Controls.Add(this.ListViewProducts);
             this.Controls.Add(this.PanelLoginOrSignUp);
@@ -130,5 +140,6 @@
         private System.Windows.Forms.Label LabelOr;
         private System.Windows.Forms.ListView ListViewProducts;
         private System.Windows.Forms.TextBox TextBoxSearch;
+        private System.Windows.Forms.Panel PanelProducts;
     }
 }

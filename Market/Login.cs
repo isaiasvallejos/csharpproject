@@ -30,6 +30,8 @@ namespace Market
         /// </summary>
         private void buttonLogin_Click(object sender, EventArgs e)
         {
+            TextBoxUsername.Focus();
+
             if (!ValidateFill())
             {
                 MessageBox.Show(

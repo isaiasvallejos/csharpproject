@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market.Models
 {
-    class Product
+    public class Product
     {
 
         public int ID
@@ -16,12 +16,6 @@ namespace Market.Models
         }
 
         public int CategoryID
-        {
-            get;
-            set;
-        }
-
-        public Category Category
         {
             get;
             set;
@@ -59,6 +53,11 @@ namespace Market.Models
 
         public DateTime UpdatedAt
         {
+            get;
+            set;
+        }
+
+        public Category Category {
             get;
             set;
         }

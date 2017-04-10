@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market.Models
 {
-    class User
+    public class User
     {
         public int ID
         {

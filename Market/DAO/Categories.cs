@@ -31,5 +31,15 @@ namespace Market.DAO
             return db.Categories.FirstOrDefault(category => category.Name.Equals(name));
         }
 
+        /// <summary>
+        /// Lista todos as categorias.
+        /// </summary>
+        public static List<Category> List() {
+            MarketContext db = new MarketContext();
+
+            return db.Categories
+                    .ToList();
+        }
+
     }
 }

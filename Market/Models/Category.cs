@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market.Models
 {
-    class Category
+    public class Category
     {
 
         public int ID

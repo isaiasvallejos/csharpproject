@@ -30,7 +30,6 @@ namespace Market.DAO
 
             return db.Products
                     .Include("Category")
-                    .OrderBy(product => product.Name)
                     .ToList();
         }
 

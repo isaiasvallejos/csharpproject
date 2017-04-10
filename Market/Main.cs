@@ -17,10 +17,10 @@ namespace Market
     public partial class FormMain : Form
     {
         private List<Panel> ProductPanels = new List<Panel>();
-        private int numberOfColumns = 2;
-        private int panelSizeHeight = 70;
-        private int panelSizeWidth = 165;
-        private int panelMargin = 5;
+        private int NumberOfColumns = 2;
+        private int PanelSizeHeight = 70;
+        private int PanelSizeWidth = 165;
+        private int PanelMargin = 5;
 
         public FormMain()
         {
@@ -29,19 +29,14 @@ namespace Market
 
         private void ButtonLoginOpen_Click(object sender, EventArgs e)
         {
-            FormLogin login = new FormLogin(this);
-            login.ShowDialog();
+            FormLogin Login = new FormLogin(this);
+            Login.ShowDialog();
         }
 
         private void ButtonSignUpOpen_Click(object sender, EventArgs e)
         {
-            FormSignUp signUp = new FormSignUp(this);
-            signUp.ShowDialog();
-        }
-
-        private void ListViewProducts_ItemActivate(object sender, EventArgs e)
-        {
-            MessageBox.Show(ListViewProducts.FocusedItem.Name);
+            FormSignUp SignUp = new FormSignUp(this);
+            SignUp.ShowDialog();
         }
 
         private void TextBoxSearch_KeyUp(object sender, KeyEventArgs e)
@@ -51,14 +46,16 @@ namespace Market
 
         private void ButtonProduct_Click(object sender, EventArgs e)
         {
-            Button button = (Button) sender;
+            Button Button = (Button) sender;
+            Product Product = (Button.Parent.Tag as Product);
 
-            MessageBox.Show((button.Parent.Tag as Product).Name);
+            FormProductBuy ProductBuy = new FormProductBuy(this, Product);
+            ProductBuy.ShowDialog();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            ListViewProducts.LargeImageList = new ImageList();
+            ComboBoxOrderBy.SelectedIndex = 0;
 
             LoadItemsAndGroups();
             UpdateItems();
@@ -72,32 +69,64 @@ namespace Market
 
             for (var index = 0; index < ProductPanelsFiltered.Count(); index++)
             {
-                Panel panel = ProductPanelsFiltered[index];
+                Panel Panel = ProductPanelsFiltered[index];
 
                 if (index != 0)
                 {
                     Panel lastPanel = ProductPanelsFiltered[index - 1];
 
-                    int x = index % numberOfColumns == 0 ? 0 : lastPanel.Location.X + panelSizeWidth + panelMargin;
-                    int y = index % numberOfColumns == 0 ? lastPanel.Location.Y + panelSizeHeight + panelMargin : lastPanel.Location.Y;
+                    int x = index % NumberOfColumns == 0 ? 0 : lastPanel.Location.X + PanelSizeWidth + PanelMargin;
+                    int y = index % NumberOfColumns == 0 ? lastPanel.Location.Y + PanelSizeHeight + PanelMargin : lastPanel.Location.Y;
 
-                    panel.Location = new System.Drawing.Point(x, y);
+                    Panel.Location = new System.Drawing.Point(x, y);
                 }
                 else
                 {
-                    panel.Location = new System.Drawing.Point(0, 0);
+                    Panel.Location = new System.Drawing.Point(0, 0);
                 }
 
-                PanelProducts.Controls.Add(panel);
+                PanelProducts.Controls.Add(Panel);
+            }
+
+            if (ProductPanelsFiltered.Count() == 0) {
+                Label message = new Label();
+
+                message.Location = new System.Drawing.Point(75, 3);
+                message.Name = "LabelNoProduct";
+                message.Size = new System.Drawing.Size(350, 20);
+                message.TabIndex = 1;
+                message.Text = "Nenhum produto encontrado.";
+                message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                message.Location = new System.Drawing.Point(0, 0);
+
+                PanelProducts.Controls.Add(message);
             }
 
         }
 
         private List<Panel> SearchProducts()
         {
-            return ProductPanels.Where(
-                product => (product.Tag as Product).Name.IndexOf(TextBoxSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 || ((product.Tag as Product).Category != null ? (product.Tag as Product).Category.Name.IndexOf(TextBoxSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 : false)
+            List<Panel> UnorderedPanels = ProductPanels.Where(
+                Panel => (Panel.Tag as Product).Name.IndexOf(TextBoxSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 || ((Panel.Tag as Product).Category != null ? (Panel.Tag as Product).Category.Name.IndexOf(TextBoxSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0 : false)
             ).ToList();
+
+            // Alphabetical
+            if(ComboBoxOrderBy.SelectedIndex == 0) {
+                return UnorderedPanels.OrderBy(Panel => (Panel.Tag as Product).Name).ToList();
+            }
+
+            // Lowest price
+            if (ComboBoxOrderBy.SelectedIndex == 1) {
+                return UnorderedPanels.OrderByDescending(Panel => (Panel.Tag as Product).Value).ToList();
+            }
+
+            // Biggest price
+            if (ComboBoxOrderBy.SelectedIndex == 2) {
+                return UnorderedPanels.OrderBy(Panel => (Panel.Tag as Product).Value).ToList();
+            }
+
+            return UnorderedPanels;
+
         }
 
         private void LoadItemsAndGroups()
@@ -106,68 +135,72 @@ namespace Market
 
             for (var index = 0; index < products.Count(); index++)
             {
-                Panel panel = new Panel();
+                Panel Panel = new Panel();
 
                 Product product = products[index];
 
-                panel.BackColor = System.Drawing.SystemColors.Window;
-                panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                panel.Name = "PanelProduct" + index.ToString();
-                panel.Size = new System.Drawing.Size(panelSizeWidth, panelSizeHeight);
-                panel.TabIndex = index;
-                panel.Tag = product;
+                Panel.BackColor = System.Drawing.SystemColors.Window;
+                Panel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                Panel.Name = "PanelProduct" + index.ToString();
+                Panel.Size = new System.Drawing.Size(PanelSizeWidth, PanelSizeHeight);
+                Panel.TabIndex = index;
+                Panel.Tag = product;
 
-                Label name = new Label();
-                panel.Controls.Add(name);
+                Label Name = new Label();
+                Panel.Controls.Add(Name);
 
-                name.Location = new System.Drawing.Point(75, 3);
-                name.Name = "LabelProduct" + index.ToString() + "Name";
-                name.Size = new System.Drawing.Size(84, 19);
-                name.TabIndex = 1;
-                name.Text = product.Name;
-                name.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+                Name.Location = new System.Drawing.Point(75, 3);
+                Name.Name = "LabelProduct" + index.ToString() + "Name";
+                Name.Size = new System.Drawing.Size(84, 19);
+                Name.TabIndex = 1;
+                Name.Text = product.Name;
+                Name.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+                Name.AutoEllipsis = true;
 
-                Label value = new Label();
-                panel.Controls.Add(value);
+                Label Value = new Label();
+                Panel.Controls.Add(Value);
 
-                value.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                value.Location = new System.Drawing.Point(74, 25);
-                value.Name = "LabelProduct" + index.ToString() + "Value";
-                value.Size = new System.Drawing.Size(82, 14);
-                value.TabIndex = 2;
-                value.Text = "$" + product.Value.ToString();
-                value.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+                Value.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                Value.Location = new System.Drawing.Point(74, 25);
+                Value.Name = "LabelProduct" + index.ToString() + "Value";
+                Value.Size = new System.Drawing.Size(82, 14);
+                Value.TabIndex = 2;
+                Value.Text = "$" + product.Value.ToString();
+                Value.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 
-                PictureBox image = new PictureBox();
-                panel.Controls.Add(image);
+                PictureBox Image = new PictureBox();
+                Panel.Controls.Add(Image);
 
-                image.Location = new System.Drawing.Point(0, 0);
-                image.Size = new System.Drawing.Size(70, 70);
+                Image.Location = new System.Drawing.Point(0, 0);
+                Image.Size = new System.Drawing.Size(70, 70);
 
                 if (product.Image != null)
                 {
-                    image.Image = ImageBytefy.ByteArrayToImage(product.Image);
-                    image.SizeMode = PictureBoxSizeMode.StretchImage;
+                    Image.Image = ImageBytefy.ByteArrayToImage(product.Image);
+                    Image.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
 
-                Button buy = new Button();
-                panel.Controls.Add(buy);
+                Button Buy = new Button();
+                Panel.Controls.Add(Buy);
 
-                buy.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
-                buy.Location = new System.Drawing.Point(100, 42);
-                buy.Name = "ButtonProduct" + index.ToString();
-                buy.Size = new System.Drawing.Size(59, 22);
-                buy.TabIndex = 3;
-                buy.Text = "Comprar";
-                buy.UseVisualStyleBackColor = true;
-                buy.Click += new EventHandler(ButtonProduct_Click);
+                Buy.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+                Buy.Location = new System.Drawing.Point(100, 42);
+                Buy.Name = "ButtonProduct" + index.ToString();
+                Buy.Size = new System.Drawing.Size(59, 22);
+                Buy.TabIndex = 3;
+                Buy.Text = "Comprar";
+                Buy.UseVisualStyleBackColor = true;
+                Buy.Click += new EventHandler(ButtonProduct_Click);
 
-                PanelProducts.Controls.Add(panel);
-                ProductPanels.Add(panel);
+                PanelProducts.Controls.Add(Panel);
+                ProductPanels.Add(Panel);
 
             }
 
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e) {
+            UpdateItems();
+        }
     }
 }

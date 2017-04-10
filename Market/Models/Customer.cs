@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Market.Models
 {
-    class Customer : User
+    public class Customer : User
     {
 
         public string Phone

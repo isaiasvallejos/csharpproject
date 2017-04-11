@@ -29,13 +29,13 @@
             this.PanelUsername = new System.Windows.Forms.Panel();
             this.PictureBoxProductImage = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.TextBoxDescription = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ButtonLogin = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.NumericProductValue = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.NumericProductValue = new System.Windows.Forms.NumericUpDown();
             this.LabelProductImage = new System.Windows.Forms.Label();
             this.ComboBoxProductCategory = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -97,16 +97,15 @@
             this.label1.Text = "Descrição";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox1
+            // TextBoxDescription
             // 
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.textBox1.Location = new System.Drawing.Point(23, 185);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(380, 136);
-            this.textBox1.TabIndex = 10;
+            this.TextBoxDescription.AcceptsTab = true;
+            this.TextBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBoxDescription.Location = new System.Drawing.Point(23, 185);
+            this.TextBoxDescription.Multiline = true;
+            this.TextBoxDescription.Name = "TextBoxDescription";
+            this.TextBoxDescription.Size = new System.Drawing.Size(380, 136);
+            this.TextBoxDescription.TabIndex = 10;
             // 
             // panel1
             // 
@@ -153,6 +152,15 @@
             this.panel2.Size = new System.Drawing.Size(107, 25);
             this.panel2.TabIndex = 16;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(13, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "$";
+            // 
             // NumericProductValue
             // 
             this.NumericProductValue.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -166,15 +174,6 @@
             this.NumericProductValue.Name = "NumericProductValue";
             this.NumericProductValue.Size = new System.Drawing.Size(74, 16);
             this.NumericProductValue.TabIndex = 17;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(7, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(13, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "$";
             // 
             // LabelProductImage
             // 
@@ -232,7 +231,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.ButtonLogin);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TextBoxDescription);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.PictureBoxProductImage);
             this.Controls.Add(this.LabelUsername);
@@ -261,7 +260,7 @@
         private System.Windows.Forms.Panel PanelUsername;
         private System.Windows.Forms.PictureBox PictureBoxProductImage;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox TextBoxDescription;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button ButtonLogin;
         private System.Windows.Forms.Label label2;

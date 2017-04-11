@@ -39,6 +39,12 @@ namespace Market.Models
             set;
         }
 
+        public int Quantity
+        {
+            get;
+            set;
+        }
+
         public byte[] Image
         {
             get;

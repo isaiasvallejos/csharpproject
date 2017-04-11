@@ -30,50 +30,29 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.PanelProducts = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.GroupBoxSearch = new System.Windows.Forms.GroupBox();
             this.TextBoxSearch = new System.Windows.Forms.TextBox();
             this.PanelSearch = new System.Windows.Forms.Panel();
             this.ComboBoxOrderBy = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.LabelOrderBy = new System.Windows.Forms.Label();
             this.GroupBoxSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelProducts
             // 
             this.PanelProducts.AutoScroll = true;
-            this.PanelProducts.Location = new System.Drawing.Point(223, 118);
+            this.PanelProducts.Location = new System.Drawing.Point(12, 98);
             this.PanelProducts.Name = "PanelProducts";
-            this.PanelProducts.Size = new System.Drawing.Size(355, 295);
+            this.PanelProducts.Size = new System.Drawing.Size(557, 514);
             this.PanelProducts.TabIndex = 7;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.SystemColors.Control;
-            this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(217, 425);
-            this.panel1.TabIndex = 10;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(197, 313);
-            this.groupBox1.TabIndex = 14;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Carrinho";
             // 
             // GroupBoxSearch
             // 
             this.GroupBoxSearch.Controls.Add(this.TextBoxSearch);
             this.GroupBoxSearch.Controls.Add(this.PanelSearch);
-            this.GroupBoxSearch.Location = new System.Drawing.Point(222, 12);
+            this.GroupBoxSearch.Location = new System.Drawing.Point(12, 12);
             this.GroupBoxSearch.Name = "GroupBoxSearch";
-            this.GroupBoxSearch.Size = new System.Drawing.Size(337, 68);
+            this.GroupBoxSearch.Size = new System.Drawing.Size(537, 68);
             this.GroupBoxSearch.TabIndex = 11;
             this.GroupBoxSearch.TabStop = false;
             this.GroupBoxSearch.Text = "Procurar por nome ou categoria de produto";
@@ -83,51 +62,53 @@
             this.TextBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TextBoxSearch.Location = new System.Drawing.Point(25, 32);
             this.TextBoxSearch.Name = "TextBoxSearch";
-            this.TextBoxSearch.Size = new System.Drawing.Size(294, 13);
-            this.TextBoxSearch.TabIndex = 9;
-            this.TextBoxSearch.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBoxSearch_KeyUp);
+            this.TextBoxSearch.Size = new System.Drawing.Size(482, 13);
+            this.TextBoxSearch.TabIndex = 1;
+            this.TextBoxSearch.TextChanged += new System.EventHandler(this.TextBoxSearch_TextChanged);
             // 
             // PanelSearch
             // 
             this.PanelSearch.BackColor = System.Drawing.Color.White;
-            this.PanelSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelSearch.Location = new System.Drawing.Point(18, 25);
             this.PanelSearch.Name = "PanelSearch";
-            this.PanelSearch.Size = new System.Drawing.Size(306, 28);
+            this.PanelSearch.Size = new System.Drawing.Size(502, 28);
             this.PanelSearch.TabIndex = 10;
             // 
             // ComboBoxOrderBy
             // 
+            this.ComboBoxOrderBy.Cursor = System.Windows.Forms.Cursors.Default;
             this.ComboBoxOrderBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxOrderBy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ComboBoxOrderBy.FormattingEnabled = true;
             this.ComboBoxOrderBy.Items.AddRange(new object[] {
             "Ordem alfabética",
             "Maior preço",
             "Menor preço"});
-            this.ComboBoxOrderBy.Location = new System.Drawing.Point(441, 87);
+            this.ComboBoxOrderBy.Location = new System.Drawing.Point(375, 71);
             this.ComboBoxOrderBy.Name = "ComboBoxOrderBy";
-            this.ComboBoxOrderBy.Size = new System.Drawing.Size(118, 21);
-            this.ComboBoxOrderBy.TabIndex = 12;
-            this.ComboBoxOrderBy.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.ComboBoxOrderBy.Size = new System.Drawing.Size(157, 21);
+            this.ComboBoxOrderBy.TabIndex = 99;
+            this.ComboBoxOrderBy.TabStop = false;
+            this.ComboBoxOrderBy.SelectedIndexChanged += new System.EventHandler(this.ComboBoxOrderBy_SelectedIndexChanged);
             // 
-            // label1
+            // LabelOrderBy
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(375, 90);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Ordenar por";
+            this.LabelOrderBy.AutoSize = true;
+            this.LabelOrderBy.Location = new System.Drawing.Point(305, 71);
+            this.LabelOrderBy.Name = "LabelOrderBy";
+            this.LabelOrderBy.Size = new System.Drawing.Size(63, 13);
+            this.LabelOrderBy.TabIndex = 13;
+            this.LabelOrderBy.Text = "Ordenar por";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(578, 425);
-            this.Controls.Add(this.label1);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(796, 624);
+            this.Controls.Add(this.LabelOrderBy);
             this.Controls.Add(this.ComboBoxOrderBy);
             this.Controls.Add(this.GroupBoxSearch);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.PanelProducts);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -137,7 +118,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Market";
             this.Load += new System.EventHandler(this.FormMain_Load);
-            this.panel1.ResumeLayout(false);
             this.GroupBoxSearch.ResumeLayout(false);
             this.GroupBoxSearch.PerformLayout();
             this.ResumeLayout(false);
@@ -147,12 +127,10 @@
 
         #endregion
         private System.Windows.Forms.Panel PanelProducts;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox GroupBoxSearch;
         private System.Windows.Forms.TextBox TextBoxSearch;
         private System.Windows.Forms.Panel PanelSearch;
         private System.Windows.Forms.ComboBox ComboBoxOrderBy;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label LabelOrderBy;
     }
 }

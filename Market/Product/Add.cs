@@ -56,6 +56,7 @@ namespace Market {
             product.Name = TextBoxProductName.Text;
             product.Value = Convert.ToDouble(NumericProductValue.Value);
             product.Image = (PictureBoxProductImage.Tag as byte[]);
+            product.Description = TextBoxDescription.Text;
             product.CreatedAt = DateTime.Now;
             product.UpdatedAt = DateTime.Now;
 

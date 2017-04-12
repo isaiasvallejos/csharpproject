@@ -15,7 +15,7 @@ namespace Shop.Components {
 
         public Panel MainPanel;
         public Panel ModelPanel;
-        public List<CartProduct> CartProducts = new List<CartProduct>();
+        public List<OrderProduct> CartProducts = new List<OrderProduct>();
 
         public int PanelMargin = 5;
 
@@ -80,9 +80,9 @@ namespace Shop.Components {
 
         }
 
-        public void Add(CartProduct CartProduct) {
+        public void Add(OrderProduct CartProduct) {
 
-            CartProduct ExistentCartProduct = CartProducts.FirstOrDefault(cartProduct => cartProduct.Product.Equals(CartProduct.Product));
+            OrderProduct ExistentCartProduct = CartProducts.FirstOrDefault(cartProduct => cartProduct.Product.Equals(CartProduct.Product));
 
             if (ExistentCartProduct == null){
                 CartProducts.Add(CartProduct);
@@ -93,7 +93,7 @@ namespace Shop.Components {
 
         }
 
-        public Panel Transform(CartProduct CartProduct) {
+        public Panel Transform(OrderProduct CartProduct) {
 
             Panel Panel = new Panel();
             List<Control> Model = ModelPanel.Controls.Cast<Control>().ToList();

@@ -34,7 +34,7 @@ namespace Shop {
             TextBoxDescription.Text = Product.Description;
             PictureBoxImage.Image = ImageBytefy.ByteArrayToImage(Product.Image);
 
-            CartProduct CartProduct = Main.Cart.CartProducts.FirstOrDefault(cartProduct => cartProduct.Product.Equals(Product));
+            OrderProduct CartProduct = Main.Cart.CartProducts.FirstOrDefault(cartProduct => cartProduct.Product.Equals(Product));
 
             if(CartProduct == null) {
                 NumericQuantity.Maximum = Product.Quantity;
@@ -61,7 +61,7 @@ namespace Shop {
 
         private void ButtonBuy_Click(object sender, EventArgs e) {
 
-            CartProduct CartProduct = new CartProduct();
+            OrderProduct CartProduct = new OrderProduct();
             CartProduct.Product = Product;
             CartProduct.Quantity = Convert.ToInt16(NumericQuantity.Value);
 

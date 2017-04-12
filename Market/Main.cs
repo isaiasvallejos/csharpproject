@@ -112,7 +112,7 @@ namespace Shop
             NumericUpDown Quantity = (sender as NumericUpDown);
             Panel Panel = (Quantity.Parent as Panel);
 
-            CartProduct CartProduct = (Panel.Tag as CartProduct);
+            OrderProduct CartProduct = (Panel.Tag as OrderProduct);
             CartProduct.Quantity = Convert.ToInt16(Quantity.Value);
 
             Label Value = (Panel.Controls.Find("LabelCartProduct" + Panel.TabIndex.ToString() + "Value", true)[0] as Label);
@@ -126,7 +126,7 @@ namespace Shop
 
             if (MessageBox.Show("Deseja excluir o produto do seu carrinho?", "Produto", MessageBoxButtons.OKCancel, MessageBoxIcon.Information).Equals(DialogResult.OK)) {
                 Panel Panel = ((sender as Button).Parent as Panel);
-                CartProduct CartProduct = (Panel.Tag as CartProduct);
+                OrderProduct CartProduct = (Panel.Tag as OrderProduct);
 
                 Cart.CartProducts.Remove(CartProduct);
                 Cart.Update();

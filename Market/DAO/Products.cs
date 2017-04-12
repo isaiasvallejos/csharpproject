@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Market.Models;
-using Market.App;
+using Shop.Models;
+using Shop.App;
 
-namespace Market.DAO
+namespace Shop.DAO
 {
     class Products
     {
@@ -26,11 +26,11 @@ namespace Market.DAO
         /// </summary>
         public static List<Product> List()
         {
-            MarketContext db = new MarketContext();
-
-            return db.Products
-                    .Include("Category")
-                    .ToList();
+            using (MarketContext db = new MarketContext()) {
+                return db.Products
+                        .Include("Category")
+                        .ToList();
+            }
         }
 
     }

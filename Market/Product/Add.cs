@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Market.Util;
-using Market.DAO;
-using Market.Models;
+using Shop.Util;
+using Shop.DAO;
+using Shop.Models;
 
-namespace Market {
+namespace Shop {
 
     public partial class FormProductAdd : Form {
 

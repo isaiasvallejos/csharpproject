@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Market.Models;
+using Shop.Models;
 
-namespace Market.App
+namespace Shop.App
 {
     class Session
     {
         static public User User;
-        static public List<Product> Cart;
 
         public static void Login(User _user)
         {

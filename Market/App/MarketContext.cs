@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Market.Models;
+using Shop.Models;
 
-namespace Market.App
+namespace Shop.App
 {
     class MarketContext : DbContext
     {

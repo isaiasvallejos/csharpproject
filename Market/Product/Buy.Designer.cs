@@ -1,4 +1,4 @@
-﻿namespace Market {
+﻿namespace Shop {
     partial class FormProductBuy {
         /// <summary>
         /// Required designer variable.
@@ -61,6 +61,7 @@
             this.ButtonBuy.TabIndex = 3;
             this.ButtonBuy.Text = "Comprar";
             this.ButtonBuy.UseVisualStyleBackColor = true;
+            this.ButtonBuy.Click += new System.EventHandler(this.ButtonBuy_Click);
             // 
             // LabelValue
             // 
@@ -82,9 +83,11 @@
             this.TextBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.TextBoxDescription.Size = new System.Drawing.Size(276, 85);
             this.TextBoxDescription.TabIndex = 5;
+            this.TextBoxDescription.TabStop = false;
             // 
             // NumericQuantity
             // 
+            this.NumericQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NumericQuantity.Location = new System.Drawing.Point(322, 131);
             this.NumericQuantity.Maximum = new decimal(new int[] {
             10,
@@ -124,7 +127,6 @@
             this.Name = "FormProductBuy";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Produto – Visualização";
             this.Load += new System.EventHandler(this.FormProductBuy_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericQuantity)).EndInit();

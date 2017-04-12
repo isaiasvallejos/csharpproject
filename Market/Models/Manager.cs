@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Market.Models
+namespace Shop.Models
 {
     public class Manager : User
     {

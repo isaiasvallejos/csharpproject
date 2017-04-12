@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Market.App;
-using Market.Models;
-using Market.DAO;
+using Shop.App;
+using Shop.Models;
+using Shop.DAO;
 
-namespace Market
+namespace Shop
 {
     public partial class FormLogin : Form
     {

@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Market.App;
-using Market.Models;
-using Market.Util;
+using Shop.App;
+using Shop.Models;
+using Shop.Util;
 
-namespace Market {
+namespace Shop {
     public partial class FormProductBuy : Form {
 
         private FormMain Main;
@@ -27,16 +27,51 @@ namespace Market {
 
         private void FormProductBuy_Load(object sender, EventArgs e)
         {
+            Text = Product.Category.Name + " – " + Product.Name;
+
             LabelName.Text = Product.Name;
-            LabelValue.Text = "$" + Product.Value.ToString("#.00");
+            LabelValue.Text = "$" + Product.Value.ToString("0.00");
             TextBoxDescription.Text = Product.Description;
             PictureBoxImage.Image = ImageBytefy.ByteArrayToImage(Product.Image);
-            NumericQuantity.Maximum = Product.Quantity;
+
+            CartProduct CartProduct = Main.Cart.CartProducts.FirstOrDefault(cartProduct => cartProduct.Product.Equals(Product));
+
+            if(CartProduct == null) {
+                NumericQuantity.Maximum = Product.Quantity;
+            } else {
+                int Quantity = Product.Quantity - CartProduct.Quantity;
+
+                if (Quantity > 0) {
+                    NumericQuantity.Maximum = Quantity;
+                } else {
+                    NumericQuantity.Maximum = 0;
+                    NumericQuantity.Enabled = false;
+                    ButtonBuy.Enabled = false;
+                }
+            }
+                        
         }
 
         private void NumericQuantity_ValueChanged(object sender, EventArgs e)
         {
-            LabelValue.Text = "$" + (Convert.ToInt16(NumericQuantity.Value) * Product.Value).ToString("#.00");
+            if(Convert.ToInt16(NumericQuantity.Value) > 0) {
+                LabelValue.Text = "$" + (Convert.ToInt16(NumericQuantity.Value) * Product.Value).ToString("0.00");
+            }  
+        }
+
+        private void ButtonBuy_Click(object sender, EventArgs e) {
+
+            CartProduct CartProduct = new CartProduct();
+            CartProduct.Product = Product;
+            CartProduct.Quantity = Convert.ToInt16(NumericQuantity.Value);
+
+            Main.Cart.Add(CartProduct);
+            Main.Cart.Update();
+            Main.UpdateCartTotals();
+
+            Main.Focus();
+
+            Close();
         }
     }
 }

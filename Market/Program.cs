@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.Entity;
-using Market.App;
+using Shop.App;
 
-namespace Market
+namespace Shop
 {
     static class Program
     {

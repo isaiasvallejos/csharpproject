@@ -1,4 +1,4 @@
-﻿namespace Market
+﻿namespace Shop
 {
     partial class FormLogin
     {

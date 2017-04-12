@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
-using Market.Models;
-using Market.DAO;
-using Market.App;
+using Shop.Models;
+using Shop.DAO;
+using Shop.App;
 
-namespace Market
+namespace Shop
 {
     public partial class FormSignUp : Form
     {

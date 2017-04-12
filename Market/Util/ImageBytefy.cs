@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Drawing;
 
-namespace Market.Util
+namespace Shop.Util
 {
     class ImageBytefy
     {

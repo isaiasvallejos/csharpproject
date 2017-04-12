@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Market.Models;
-using Market.App;
+using Shop.Models;
+using Shop.App;
 
-namespace Market.DAO
+namespace Shop.DAO
 {
     class Categories
     {

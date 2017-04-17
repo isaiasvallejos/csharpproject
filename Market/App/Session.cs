@@ -11,9 +11,14 @@ namespace Shop.App
     {
         static public User User;
 
-        public static void Login(User _user)
+        public static void Login(User user)
         {
-            User = _user;
+            User = user;
         }
+
+        public static void Logout() {
+            User = null;
+        }
+
     }
 }

@@ -9,14 +9,19 @@ using Shop.Models;
 
 namespace Shop.App
 {
-    class MarketContext : DbContext
-    {
+    public class MarketContext : DbContext {
 
         public MarketContext() : base("MarketContext")
-        {
+        {          
         }
 
-        public DbSet<User> Users {
+        public DbSet<User> Users 
+        {
+            get;
+            set;
+        }
+
+        public DbSet<Customer> Customers {
             get;
             set;
         }
@@ -29,6 +34,11 @@ namespace Shop.App
 
         public DbSet<Product> Products
         {
+            get;
+            set;
+        }
+
+        public DbSet<Order> Orders {
             get;
             set;
         }

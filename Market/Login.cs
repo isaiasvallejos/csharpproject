@@ -7,96 +7,98 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Shop.App;
 using Shop.Models;
-using Shop.DAO;
+using Shop.App;
+using Shop.Util;
 
-namespace Shop
-{
-    public partial class FormLogin : Form
-    {
+namespace Shop {
+
+    public partial class FormLogin : Form {
+
         private FormMain Main;
+        public event EventHandler Login;
 
-        public FormLogin(FormMain _Main)
-        {
-            Main = _Main;
+        public FormLogin(FormMain main) {
+            Main = main;
 
-            InitializeComponent(); 
+            InitializeComponent();
         }
 
-        /// <summary>
-        /// Evento ao pressionar uma clicar no Button de conectar-se.
-        /// <para>Valida, busca o usuário e realiza login baseado no usuário encontrado.</para>
-        /// </summary>
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
+        private void TextBoxPassword_Enter(object sender, EventArgs e) {
+
+            if (TextBoxPassword.Text.Equals("Senha")) {
+                TextBoxPassword.Text = "";
+                TextBoxPassword.ForeColor = System.Drawing.SystemColors.WindowText;
+                TextBoxPassword.UseSystemPasswordChar = true;
+            }
+
+        }
+
+        private void TextBoxPassword_Leave(object sender, EventArgs e) {
+
+            if (TextBoxPassword.Text.Equals("")) {
+                TextBoxPassword.UseSystemPasswordChar = false;
+                TextBoxPassword.Text = "Senha";
+                TextBoxPassword.ForeColor = System.Drawing.SystemColors.ControlDark;
+            }
+
+        }
+
+        private void ButtonLogin_Click(object sender, EventArgs e) {
+
+            if (!ValidateUsername()) {
+                MessageBox.Show("Insira seu nome de usuário.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TextBoxUsername.Focus();
+
+                return;
+            }
+
+            if (!ValidatePassword()) {
+                MessageBox.Show("Insira sua senha.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TextBoxUsername.Focus();
+
+                return;
+            }
+
+            try {
+
+                User user = DAO.Users.FindOneByLogin(TextBoxUsername.Text, TextBoxPassword.Text);
+
+                if (user != null && user is Customer) {
+
+                    Session.Login(user);
+                    Main.Menu.Customer = (Customer)Session.User;
+                    Main.Menu.UpdateView();
+
+                    Close();
+
+                } else {
+                    MessageBox.Show("Nome de usuário e/ou senha inválidos.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            } catch {
+                MessageBox.Show("Ocorreu um erro interno, tente novamente mais tarde.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             TextBoxUsername.Focus();
 
-            if (!ValidateFill())
-            {
-                MessageBox.Show(
-                    "Por favor, preencha os campos solicitados.",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-
-                return;
-            }
-
-            string username = TextBoxUsername.Text;
-            string password = TextBoxPassword.Text;
-
-            User user = Users.FindOneByLogin(username, password);
-
-            if(user == null)
-            {
-                MessageBox.Show(
-                    "Usuário e/ou senha inválidos, tente novamente.",
-                    "Aviso",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-
-                return;
-            }
-
-            Session.Login(user);
-
-            ClearForm();
-            Close();
         }
 
-
-        /// <summary>
-        /// Evento ao pressionar uma tecla no TextBox de nome de usuário.
-        /// <para>Remove caractere de espaço.</para>
-        /// </summary>
-        private void TextBoxUsername_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = (e.KeyChar == (char)Keys.Space);
+        private bool ValidateUsername() {
+            return !TextBoxUsername.Text.Equals("") && TextBoxUsername.Text != null;
         }
 
-        /// <summary>
-        /// Validação de preenchimento dos campos.
-        /// </summary>
-        private bool ValidateFill()
-        {
-            return !TextBoxUsername.Text.Trim().Equals("") && !TextBoxPassword.Text.Trim().Equals("");
+        private bool ValidatePassword() {
+            return !TextBoxPassword.Text.Equals("") && TextBoxPassword.Text != null;
         }
 
-        /// <summary>
-        /// Limpa os campos do formulário.
-        /// </summary>
-        private void ClearForm()
-        {
-            foreach (Control control in Controls)
-            {
-                if (control is TextBox)
-                {
-                    (control as TextBox).Text = "";
-                }
-            }
+        private void TextBoxUsername_KeyPress(object sender, KeyPressEventArgs e) {
+            e.Handled = (e.KeyChar == (char) Keys.Space);
         }
+
+        private void FormLogin_FormClosed(object sender, FormClosedEventArgs e) {
+            if (Login != null) Login(this, EventArgs.Empty);
+        }
+
     }
 }

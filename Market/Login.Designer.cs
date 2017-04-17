@@ -1,7 +1,5 @@
-﻿namespace Shop
-{
-    partial class FormLogin
-    {
+﻿namespace Shop {
+    partial class FormLogin {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,128 +22,141 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogin));
-            this.TextBoxUsername = new System.Windows.Forms.TextBox();
-            this.TextBoxPassword = new System.Windows.Forms.TextBox();
-            this.LabelPassword = new System.Windows.Forms.Label();
-            this.LabelUsername = new System.Windows.Forms.Label();
+        private void InitializeComponent() {
+            this.GroupBoxLogin = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.LabelAddressName = new System.Windows.Forms.Label();
             this.PanelPassword = new System.Windows.Forms.Panel();
+            this.TextBoxPassword = new System.Windows.Forms.TextBox();
             this.PanelUsername = new System.Windows.Forms.Panel();
+            this.TextBoxUsername = new System.Windows.Forms.TextBox();
             this.ButtonLogin = new System.Windows.Forms.Button();
+            this.GroupBoxLogin.SuspendLayout();
+            this.PanelPassword.SuspendLayout();
+            this.PanelUsername.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TextBoxUsername
+            // GroupBoxLogin
             // 
-            this.TextBoxUsername.AcceptsTab = true;
-            this.TextBoxUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextBoxUsername.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.TextBoxUsername.Location = new System.Drawing.Point(54, 42);
-            this.TextBoxUsername.Name = "TextBoxUsername";
-            this.TextBoxUsername.Size = new System.Drawing.Size(148, 13);
-            this.TextBoxUsername.TabIndex = 1;
-            this.TextBoxUsername.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TextBoxUsername.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxUsername_KeyPress);
+            this.GroupBoxLogin.Controls.Add(this.label1);
+            this.GroupBoxLogin.Controls.Add(this.LabelAddressName);
+            this.GroupBoxLogin.Controls.Add(this.PanelPassword);
+            this.GroupBoxLogin.Controls.Add(this.PanelUsername);
+            this.GroupBoxLogin.Location = new System.Drawing.Point(12, 12);
+            this.GroupBoxLogin.Name = "GroupBoxLogin";
+            this.GroupBoxLogin.Size = new System.Drawing.Size(222, 117);
+            this.GroupBoxLogin.TabIndex = 110;
+            this.GroupBoxLogin.TabStop = false;
+            this.GroupBoxLogin.Text = "Autenticação";
             // 
-            // TextBoxPassword
+            // label1
             // 
-            this.TextBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextBoxPassword.Location = new System.Drawing.Point(54, 92);
-            this.TextBoxPassword.Name = "TextBoxPassword";
-            this.TextBoxPassword.Size = new System.Drawing.Size(148, 13);
-            this.TextBoxPassword.TabIndex = 2;
-            this.TextBoxPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TextBoxPassword.UseSystemPasswordChar = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label1.Location = new System.Drawing.Point(8, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 12);
+            this.label1.TabIndex = 114;
+            this.label1.Text = "Nome de Usuário";
             // 
-            // LabelPassword
+            // LabelAddressName
             // 
-            this.LabelPassword.Location = new System.Drawing.Point(57, 68);
-            this.LabelPassword.Name = "LabelPassword";
-            this.LabelPassword.Size = new System.Drawing.Size(145, 13);
-            this.LabelPassword.TabIndex = 2;
-            this.LabelPassword.Text = "Senha";
-            this.LabelPassword.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // LabelUsername
-            // 
-            this.LabelUsername.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.LabelUsername.Location = new System.Drawing.Point(54, 18);
-            this.LabelUsername.Name = "LabelUsername";
-            this.LabelUsername.Size = new System.Drawing.Size(148, 13);
-            this.LabelUsername.TabIndex = 3;
-            this.LabelUsername.Text = "Nome de usuário";
-            this.LabelUsername.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.LabelAddressName.AutoSize = true;
+            this.LabelAddressName.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.LabelAddressName.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.LabelAddressName.Location = new System.Drawing.Point(8, 65);
+            this.LabelAddressName.Name = "LabelAddressName";
+            this.LabelAddressName.Size = new System.Drawing.Size(31, 12);
+            this.LabelAddressName.TabIndex = 113;
+            this.LabelAddressName.Text = "Senha";
             // 
             // PanelPassword
             // 
             this.PanelPassword.BackColor = System.Drawing.Color.White;
-            this.PanelPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelPassword.Location = new System.Drawing.Point(47, 86);
+            this.PanelPassword.Controls.Add(this.TextBoxPassword);
+            this.PanelPassword.Location = new System.Drawing.Point(10, 82);
             this.PanelPassword.Name = "PanelPassword";
-            this.PanelPassword.Size = new System.Drawing.Size(161, 25);
-            this.PanelPassword.TabIndex = 4;
+            this.PanelPassword.Size = new System.Drawing.Size(202, 23);
+            this.PanelPassword.TabIndex = 108;
+            // 
+            // TextBoxPassword
+            // 
+            this.TextBoxPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBoxPassword.Location = new System.Drawing.Point(6, 5);
+            this.TextBoxPassword.Name = "TextBoxPassword";
+            this.TextBoxPassword.PasswordChar = '*';
+            this.TextBoxPassword.Size = new System.Drawing.Size(191, 13);
+            this.TextBoxPassword.TabIndex = 1;
             // 
             // PanelUsername
             // 
             this.PanelUsername.BackColor = System.Drawing.Color.White;
-            this.PanelUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelUsername.Location = new System.Drawing.Point(47, 36);
+            this.PanelUsername.Controls.Add(this.TextBoxUsername);
+            this.PanelUsername.Location = new System.Drawing.Point(10, 36);
             this.PanelUsername.Name = "PanelUsername";
-            this.PanelUsername.Size = new System.Drawing.Size(161, 25);
-            this.PanelUsername.TabIndex = 5;
+            this.PanelUsername.Size = new System.Drawing.Size(202, 23);
+            this.PanelUsername.TabIndex = 12;
+            // 
+            // TextBoxUsername
+            // 
+            this.TextBoxUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBoxUsername.Location = new System.Drawing.Point(6, 5);
+            this.TextBoxUsername.Name = "TextBoxUsername";
+            this.TextBoxUsername.Size = new System.Drawing.Size(191, 13);
+            this.TextBoxUsername.TabIndex = 0;
+            this.TextBoxUsername.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxUsername_KeyPress);
             // 
             // ButtonLogin
             // 
-            this.ButtonLogin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ButtonLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ButtonLogin.FlatAppearance.BorderSize = 0;
             this.ButtonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonLogin.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ButtonLogin.Location = new System.Drawing.Point(90, 124);
+            this.ButtonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.ButtonLogin.Location = new System.Drawing.Point(169, 139);
             this.ButtonLogin.Name = "ButtonLogin";
-            this.ButtonLogin.Size = new System.Drawing.Size(79, 26);
-            this.ButtonLogin.TabIndex = 3;
-            this.ButtonLogin.Text = "&Conectar-se";
-            this.ButtonLogin.UseVisualStyleBackColor = false;
-            this.ButtonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
+            this.ButtonLogin.Size = new System.Drawing.Size(55, 22);
+            this.ButtonLogin.TabIndex = 110;
+            this.ButtonLogin.Text = "Entrar";
+            this.ButtonLogin.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.ButtonLogin.UseVisualStyleBackColor = true;
+            this.ButtonLogin.Click += new System.EventHandler(this.ButtonLogin_Click);
             // 
             // FormLogin
             // 
             this.AcceptButton = this.ButtonLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(264, 171);
+            this.ClientSize = new System.Drawing.Size(245, 171);
+            this.Controls.Add(this.GroupBoxLogin);
             this.Controls.Add(this.ButtonLogin);
-            this.Controls.Add(this.LabelUsername);
-            this.Controls.Add(this.LabelPassword);
-            this.Controls.Add(this.TextBoxPassword);
-            this.Controls.Add(this.TextBoxUsername);
-            this.Controls.Add(this.PanelPassword);
-            this.Controls.Add(this.PanelUsername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormLogin";
             this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login";
+            this.Text = "Cliente – Login";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormLogin_FormClosed);
+            this.GroupBoxLogin.ResumeLayout(false);
+            this.GroupBoxLogin.PerformLayout();
+            this.PanelPassword.ResumeLayout(false);
+            this.PanelPassword.PerformLayout();
+            this.PanelUsername.ResumeLayout(false);
+            this.PanelUsername.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TextBox TextBoxUsername;
-        private System.Windows.Forms.TextBox TextBoxPassword;
-        private System.Windows.Forms.Label LabelPassword;
-        private System.Windows.Forms.Label LabelUsername;
+        private System.Windows.Forms.GroupBox GroupBoxLogin;
         private System.Windows.Forms.Panel PanelPassword;
         private System.Windows.Forms.Panel PanelUsername;
+        private System.Windows.Forms.Label LabelAddressName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TextBoxUsername;
+        private System.Windows.Forms.TextBox TextBoxPassword;
         private System.Windows.Forms.Button ButtonLogin;
     }
 }

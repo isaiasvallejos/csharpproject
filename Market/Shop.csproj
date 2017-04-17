@@ -7,8 +7,8 @@
     <ProjectGuid>{2DB6A6FB-8EE1-462B-8864-4CC007A17D30}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Market</RootNamespace>
-    <AssemblyName>Market</AssemblyName>
+    <RootNamespace>Shop</RootNamespace>
+    <AssemblyName>Shop</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,6 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CoContra.net45, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CoContra.1.0.2\lib\net45\CoContra.net45.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -56,7 +60,15 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.TypedOriginalValues, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.TypedOriginalValues.1.0.1\lib\net40\EntityFramework.TypedOriginalValues.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -71,13 +83,75 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\MarketContext.cs" />
+    <Compile Include="App\MarketSingleContext.cs" />
     <Compile Include="App\Session.cs" />
-    <Compile Include="Components\Cart.cs" />
-    <Compile Include="Components\ProductBox.cs" />
+    <Compile Include="Components\CartPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\CartPanel.Designer.cs">
+      <DependentUpon>CartPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CartProductBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\CartProductBox.Designer.cs">
+      <DependentUpon>CartProductBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\CartProductPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\CartProductPanel.Designer.cs">
+      <DependentUpon>CartProductPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ComboBoxPlaceHolder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\ComboBoxPlaceHolder.Designer.cs">
+      <DependentUpon>ComboBoxPlaceHolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MainMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MaskedTextBoxPlaceHolder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\MaskedTextBoxPlaceHolder.Designer.cs">
+      <DependentUpon>MaskedTextBoxPlaceHolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ProductBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\ProductBox.Designer.cs">
+      <DependentUpon>ProductBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ProductPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\ProductPanel.Designer.cs">
+      <DependentUpon>ProductPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\TextBoxPlaceHolder.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\TextBoxPlaceHolder.Designer.cs">
+      <DependentUpon>TextBoxPlaceHolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\Cities.cs" />
+    <Compile Include="DAO\Orders.cs" />
     <Compile Include="DAO\Products.cs" />
-    <Compile Include="DAO\Customers.cs" />
     <Compile Include="DAO\Categories.cs" />
+    <Compile Include="DAO\Customers.cs" />
+    <Compile Include="DAO\States.cs" />
     <Compile Include="DAO\Users.cs" />
+    <Compile Include="LoginAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginAdmin.Designer.cs">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,17 +164,21 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderProduct.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\OrderStatus.cs" />
+    <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Product\Add.cs">
+    <Compile Include="Product\Save.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Product\Add.Designer.cs">
-      <DependentUpon>Add.cs</DependentUpon>
+    <Compile Include="Product\Save.Designer.cs">
+      <DependentUpon>Save.cs</DependentUpon>
     </Compile>
     <Compile Include="Product\Buy.cs">
       <SubType>Form</SubType>
@@ -110,21 +188,53 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SignUp.cs">
+    <Compile Include="Register.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SignUp.Designer.cs">
-      <DependentUpon>SignUp.cs</DependentUpon>
+    <Compile Include="Register.Designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util\ImageBytefy.cs" />
+    <Compile Include="Util\Encryptor.cs" />
+    <Compile Include="Util\ImageConverter.cs" />
+    <EmbeddedResource Include="Components\CartPanel.resx">
+      <DependentUpon>CartPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\CartProductBox.resx">
+      <DependentUpon>CartProductBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\CartProductPanel.resx">
+      <DependentUpon>CartProductPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\ComboBoxPlaceHolder.resx">
+      <DependentUpon>ComboBoxPlaceHolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MaskedTextBoxPlaceHolder.resx">
+      <DependentUpon>MaskedTextBoxPlaceHolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\ProductBox.resx">
+      <DependentUpon>ProductBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\ProductPanel.resx">
+      <DependentUpon>ProductPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\TextBoxPlaceHolder.resx">
+      <DependentUpon>TextBoxPlaceHolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginAdmin.resx">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Product\Add.resx">
-      <DependentUpon>Add.cs</DependentUpon>
+    <EmbeddedResource Include="Product\Save.resx">
+      <DependentUpon>Save.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Product\Buy.resx">
       <DependentUpon>Buy.cs</DependentUpon>
@@ -137,9 +247,10 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SignUp.resx">
-      <DependentUpon>SignUp.cs</DependentUpon>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

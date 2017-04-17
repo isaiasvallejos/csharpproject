@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Shop.Util
 {
-    class ImageBytefy
+    class ImageConverter
     {
         public static byte[] ImageToByteArray(Image imageIn)
         {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity.Migrations;
+using System.Data.Entity;
 using Shop.Models;
 using Shop.App;
 
@@ -10,27 +12,22 @@ namespace Shop.DAO
 {
     class Products
     {
-        /// <summary>
-        /// Adiciona um novo produto.
-        /// </summary>
-        public static void Add(Product product)
-        {
-            MarketContext db = new MarketContext();
 
-            db.Products.Add(product);
+        public static void Add(Product Product)
+        {
+            MarketContext db = MarketSingleContext.Context;
+
+            db.Products.Add(Product);
             db.SaveChanges();
         }
 
-        /// <summary>
-        /// Lista todos os produtos.
-        /// </summary>
         public static List<Product> List()
         {
-            using (MarketContext db = new MarketContext()) {
-                return db.Products
-                        .Include("Category")
-                        .ToList();
-            }
+            MarketContext db = MarketSingleContext.Context;
+
+            return db.Products
+                .Include("Category")
+                .ToList();       
         }
 
     }

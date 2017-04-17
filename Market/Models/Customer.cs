@@ -21,5 +21,18 @@ namespace Shop.Models
             set;
         }
 
+        public Address Address {
+            get;
+            set;
+        }
+
+        public List<Order> Orders {
+            get;
+        }
+
+        public Customer() {
+            Orders = new List<Order>();
+        }
+
     }
 }

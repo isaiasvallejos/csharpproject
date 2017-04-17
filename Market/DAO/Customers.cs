@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 using Shop.Models;
 using Shop.App;
 
@@ -11,14 +12,32 @@ namespace Shop.DAO
     class Customers
     {
 
-        /// <summary>
-        /// Seleciona um usuário baseado no seu nº de documento.
-        /// </summary>
-        public static Customer FindOneByDocument(string document)
+        public static void Add(Customer customer)
         {
-            MarketContext db = new MarketContext();
+            MarketContext db = MarketSingleContext.Context;
 
-            return (Customer) db.Users.FirstOrDefault(customer => (customer as Customer).Document.Equals(document));
+            customer.Password = Util.Encryptor.MD5Hash(customer.Password);
+
+            db.Users.Add(customer);
+            db.SaveChanges();
+        }
+
+        public static Customer FindOneByUsername(string username)
+        {
+            MarketContext db = MarketSingleContext.Context;
+
+            return db.Customers
+                .Include("Address")
+                .FirstOrDefault(user => user.Username.Equals(username));
+        }
+
+        public static Customer FindOneByDocument(string document) 
+        {
+            MarketContext db = MarketSingleContext.Context;
+
+            return db.Customers
+                .Include("Address")
+                .FirstOrDefault(user => user.Document.Equals(document));
         }
 
     }

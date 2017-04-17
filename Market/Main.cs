@@ -10,203 +10,224 @@ using System.Windows.Forms;
 using System.Globalization;
 using Shop.App;
 using Shop.Models;
-using Shop.Util;
-using Shop.DAO;
 using Shop.Components;
 
 namespace Shop
 {
     public partial class FormMain : Form {
-        public ProductBox ProductBox;
-        public Cart Cart;
-
+  
         public FormMain() {
             InitializeComponent();
         }
 
-        private void ButtonLoginOpen_Click(object sender, EventArgs e) {
-            FormLogin Login = new FormLogin(this);
-            Login.ShowDialog();
+        private void FormMain_Load(object sender, EventArgs e) { 
+
+            ProductBox.Products = DAO.Products.List();  
+            ProductBox.ClickProductBuy += ProductBox_ClickProductBuy;
+
+            ProductBox.UpdateView();
+
+            ComboBoxOrderBy.SelectedIndex = 1;
+            ComboBoxOrderBy.SelectedIndex = 0;
+
+            CartPanel.CartProductBox.ChangeProductQuantity += CartProductBox_ChangeProductQuantity;
+            CartPanel.CartProductBox.ClickProductRemove += CartProductBox_ClickProductRemove;
+            CartPanel.ClickFinishOrder += CartPanel_ClickFinishOrder;
+
+            Menu.Login += Menu_Login;
+            Menu.Logout += Menu_Logout;
+            Menu.Admin += Menu_Admin;
+            Menu.Register += Menu_Register;
+
         }
 
-        private void ButtonSignUpOpen_Click(object sender, EventArgs e) {
-            FormSignUp SignUp = new FormSignUp(this);
-            SignUp.ShowDialog();
+        private void Reset() {
+
+            ProductBox.Products = DAO.Products.List();
+            ProductBox.UpdateView();
+
+            CartPanel.Order.Products.Clear();
+            CartPanel.CartProductBox.UpdateView();
+
         }
 
-        private void ButtonProduct_Click(object sender, EventArgs e) {
-            Button Button = (Button)sender;
-            Product Product = (Button.Parent.Tag as Product);
+        private void Reload() {
+
+            ProductBox.Products = DAO.Products.List();
+            ProductBox.UpdateView();
+
+        }
+
+        public void Menu_Login(object sender, EventArgs e) {
+
+            FormLogin login = new FormLogin(this);
+            login.ShowDialog();
+
+        }
+
+        public void Menu_Register(object sender, EventArgs e) {
+
+            FormRegister login = new FormRegister(this);
+            login.ShowDialog();
+
+        }
+
+        public void Menu_Admin(object sender, EventArgs e) {
+
+            FormLoginAdmin login = new FormLoginAdmin(this);
+            login.ShowDialog();
+
+        }
+
+        public void Menu_Logout(object sender, EventArgs e) {
+
+            if (MessageBox.Show("Deseja deslogar sua conta?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.Yes)) {
+
+                Session.Logout();
+                Menu.Customer = (Customer)Session.User;
+
+                Menu.UpdateView();
+
+            }
+
+        }
+
+        public void CartPanel_ClickFinishOrder(object sender, EventArgs e) {
+
+            if (!CartPanel.ValidateProducts()) {
+                MessageBox.Show("O carrinho está vazio.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!CartPanel.ValidatePayment()) {
+                MessageBox.Show("Selecione um método de pagamento.", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if(Session.User == null) {
+                FormLogin login = new FormLogin(this);
+                login.Login += Login_OnLogin;
+                login.ShowDialog();
+
+                return;
+            }
+
+            CartPanel.Order.Customer = (Customer)Session.User;
+            CartPanel.Order.Status = OrderStatus.Pending;
+            CartPanel.Order.CreatedAt = DateTime.Now;
+            CartPanel.Order.UpdatedAt = DateTime.Now;
+
+            try {
+
+                DAO.Orders.Add(CartPanel.Order);
+
+                MessageBox.Show("Pedido inserido com sucesso.");
+
+                Reset();
+
+            } catch {
+                MessageBox.Show("ERRO!");
+            }            
+
+        }
+
+        private void Login_OnLogin(object sender, EventArgs e) {
+            CartPanel_ClickFinishOrder(this, EventArgs.Empty);
+        }
+
+        public void ProductBox_ClickProductBuy(object sender, EventArgs e) {
+
+            Button ButtonProductBuy = (Button)sender;
+            Product Product = (ButtonProductBuy.Parent as ProductPanel).Product;
 
             FormProductBuy ProductBuy = new FormProductBuy(this, Product);
             ProductBuy.ShowDialog();
+
         }
 
-        private void FormMain_Load(object sender, EventArgs e) {
-            LoadProductBox();
-            LoadCart();
+        public void CartProductBox_ClickProductRemove(object sender, EventArgs e) {
 
-            ComboBoxOrderBy.SelectedIndex = 0;
-            TextBoxSearch.Focus();
+            Button ButtonCartProductRemove = (Button)sender;
+            OrderProduct CartProduct = (ButtonCartProductRemove.Parent as CartProductPanel).CartProduct;
 
-            SetProductBox();
-            ProductBox.Update();
+            if (MessageBox.Show("Deseja excluir o produto (" + CartProduct.Product.Name +") do seu carrinho?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.Yes)) {
+
+                CartPanel.CartProductBox.CartProducts.Remove(CartProduct);
+                CartPanel.CartProductBox.UpdateView();
+
+            }
+
+            CartPanel.UpdateCartTotals();
+
         }
 
-        private void LoadProductBox() {
-            ProductBox = new ProductBox(PanelProducts);
+        public void CartProductBox_ChangeProductQuantity(object sender, EventArgs e) {
 
-            ProductBox.OnBuy = ButtonProduct_Click;
+            NumericUpDown NumericCartProductQuantity = (sender as NumericUpDown);
+            CartProductPanel CartProductPanel = (NumericCartProductQuantity.Parent as CartProductPanel);
 
-            ProductBox.Products = Products.List();
-            ProductBox.Initialize();
+            OrderProduct CartProduct = CartProductPanel.CartProduct;
+            CartProduct.Quantity = Convert.ToInt16(NumericCartProductQuantity.Value);
+
+            if (CartProduct.Product.Promotion) {
+                CartProductPanel.LabelCartProductValue.Text = "$" + (CartProduct.Quantity * CartProduct.Product.PromotionValue).ToString("0.00");
+            } else {
+                CartProductPanel.LabelCartProductValue.Text = "$" + (CartProduct.Quantity * CartProduct.Product.Value).ToString("0.00");
+            }
+
+            CartPanel.UpdateCartTotals();
+
         }
 
-        private void LoadCart() {
-            Cart = new Cart(PanelCart);
-            Cart.OnChangeQuantity = NumericCartProductQuantity_ValueChanged;
-            Cart.OnRemove = ButtonCartProductRemove_Click;
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e) {
 
-            Cart.Initialize();
-            UpdateCartTotals();
-            Cart.Update();
+            if (MessageBox.Show("Deseja sair da Prophet Shop?", "Sair", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.No)) {
+                e.Cancel = true;
+            }
+
         }
 
         private void ComboBoxOrderBy_SelectedIndexChanged(object sender, EventArgs e) {
             TextBoxSearch.Focus();
 
-            SetProductBox();
-            ProductBox.Update();
-        }
-
-        private void SetProductBox() {
-
-            ProductBox.Search(TextBoxSearch.Text);
-
             if (ComboBoxOrderBy.SelectedIndex == 0) {
-                ProductBox.OrderByAlphabetical();
+                ProductBox.Products = ProductBox.Products.OrderBy(Product => !Product.Promotion).ThenByDescending(Product => Product.PromotionPercentage).ToList();
             }
 
             if (ComboBoxOrderBy.SelectedIndex == 1) {
-                ProductBox.OrderByLowestPrice();
+                ProductBox.Products = ProductBox.Products.OrderBy(Product => Product.Name).ToList();
             }
 
             if (ComboBoxOrderBy.SelectedIndex == 2) {
-                ProductBox.OrderByBiggestPrice();
+                ProductBox.Products = ProductBox.Products.OrderByDescending(Product => Product.Promotion ? Product.PromotionValue : Product.Value).ToList();
             }
 
-            ProductBox.MoveDisabledProductsToEnd();
+            if (ComboBoxOrderBy.SelectedIndex == 3) {
+                ProductBox.Products = ProductBox.Products.OrderBy(Product => Product.Promotion ? Product.PromotionValue : Product.Value).ToList();
+            }
+
+            ProductBox.UpdateView();
 
         }
 
-        private void TextBoxSearch_TextChanged(object sender, EventArgs e) {
-            SetProductBox();
+        private void TextBoxSearch_KeyDown(object sender, KeyEventArgs e) {
 
-            if (!ProductBox.LastProductPanels.SequenceEqual(ProductBox.CurrentProductPanels)) {
-                ProductBox.Update();
-            }
-        }
+            if (e.KeyCode == Keys.Enter) {
 
-        private void NumericCartProductQuantity_ValueChanged(object sender, EventArgs e) {
+                ProductBox.Products = DAO.Products.List().Where(
+                    Product => Product.Name.IndexOf(TextBoxSearch.TextOnly, StringComparison.OrdinalIgnoreCase) >= 0 || Product.Category.Name.IndexOf(TextBoxSearch.TextOnly, StringComparison.OrdinalIgnoreCase) >= 0
+                ).ToList();
 
-            NumericUpDown Quantity = (sender as NumericUpDown);
-            Panel Panel = (Quantity.Parent as Panel);
+                ComboBoxOrderBy_SelectedIndexChanged(ComboBoxOrderBy, EventArgs.Empty);
 
-            OrderProduct CartProduct = (Panel.Tag as OrderProduct);
-            CartProduct.Quantity = Convert.ToInt16(Quantity.Value);
+                ProductBox.UpdateView();
 
-            Label Value = (Panel.Controls.Find("LabelCartProduct" + Panel.TabIndex.ToString() + "Value", true)[0] as Label);
-            Value.Text = "$" + (Convert.ToInt16(CartProduct.Quantity) * CartProduct.Product.Value).ToString("0.00");
-
-            UpdateCartTotals();
-
-        }
-
-        private void ButtonCartProductRemove_Click(object sender, EventArgs e) {
-
-            if (MessageBox.Show("Deseja excluir o produto do seu carrinho?", "Produto", MessageBoxButtons.OKCancel, MessageBoxIcon.Information).Equals(DialogResult.OK)) {
-                Panel Panel = ((sender as Button).Parent as Panel);
-                OrderProduct CartProduct = (Panel.Tag as OrderProduct);
-
-                Cart.CartProducts.Remove(CartProduct);
-                Cart.Update();
-            }
-
-            UpdateCartTotals();
-
-        }
-
-        public void UpdateCartTotals() {
-
-            double discount = 0;
-
-            double totalProducts = Cart.TotalCartProducts();
-
-            if (totalProducts > 0) {
-                LabelCartSubtotalValue.Text = "$" + totalProducts.ToString("0.00");
-            } else {
-                LabelCartSubtotalValue.Text = "$0";
-            }
-
-            double totalShipping = Cart.TotalShipping();
-
-            if (totalShipping > 0) {
-                LabelCartShippingValue.Text = "$" + totalShipping.ToString("0.00");
-            } else {
-                LabelCartShippingValue.Text = "$0";
-            }
-
-            if(discount > 0) {
-                LabelCartDiscountValue.Text = "-$" + discount.ToString("0.00");
-            } else {
-                LabelCartDiscountValue.Text = "$0";
-            }
-
-            double total = (totalProducts + totalShipping) - discount;
-
-            if (total > 0) {
-                LabelCartTotalValue.Text = "$" + total.ToString("0.00");
-            } else {
-                LabelCartTotalValue.Text = "$0";
             }
 
         }
 
-        private void TextBoxUsername_Enter(object sender, EventArgs e) {
-            if (TextBoxUsername.Text.Equals("Nome de Usuário")) {
-                TextBoxUsername.Text = "";
-                TextBoxUsername.ForeColor = System.Drawing.SystemColors.WindowText;
-            }
+        private void PictureBoxLogo_Click(object sender, EventArgs e) {
+            Reload();
         }
-
-        private void TextBoxUsername_Leave(object sender, EventArgs e) {
-            if (TextBoxUsername.Text.Equals("")) {
-                TextBoxUsername.Text = "Nome de Usuário";
-                TextBoxUsername.ForeColor = System.Drawing.SystemColors.ControlDark;
-            }
-        }
-
-        private void TextBoxPassword_Enter(object sender, EventArgs e) {
-            if (TextBoxPassword.Text.Equals("Senha")) {
-                TextBoxPassword.Text = "";
-                TextBoxPassword.ForeColor = System.Drawing.SystemColors.WindowText;
-                TextBoxPassword.UseSystemPasswordChar = true;
-            }
-        }
-
-        private void TextBoxPassword_Leave(object sender, EventArgs e) {
-            if (TextBoxPassword.Text.Equals("")) {
-                TextBoxPassword.UseSystemPasswordChar = false;
-                TextBoxPassword.Text = "Senha";
-                TextBoxPassword.ForeColor = System.Drawing.SystemColors.ControlDark;
-            }
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e) {
-            if (MessageBox.Show("Deseja sair da Prophet Shop?", "Sair", MessageBoxButtons.OKCancel, MessageBoxIcon.Information).Equals(DialogResult.Cancel)) {
-                e.Cancel = true;
-            }
-        }
-
     }
 }

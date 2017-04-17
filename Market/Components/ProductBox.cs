@@ -1,207 +1,108 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Linq;
+using System.ComponentModel;
 using System.Drawing;
+using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Shop.Models;
-using Shop.App;
-using Shop.Util;
 
 namespace Shop.Components {
 
-    public class ProductBox {
+    public partial class ProductBox : UserControl {
 
-        public Panel MainPanel;
-        public Panel ModelPanel;
+        public List<Product> Products = new List<Product>();
 
-        public int NumberOfColumns = 3;
-        public int PanelMargin = 10;
+        public EventHandler ClickProductBuy;
+        public int NumberOfColumns = 0;
 
-        public List<Product> Products;
-
-        public List<Panel> InitialProductPanels = new List<Panel>();
-        public List<Panel> CurrentProductPanels = new List<Panel>();
-        public List<Panel> LastProductPanels = new List<Panel>();
-
-        public EventHandler OnBuy;
-
-        public ProductBox(Panel _MainPanel) {
-            MainPanel = _MainPanel;      
+        public ProductBox() {
+            InitializeComponent();
         }
 
-        public void Initialize() {
+        private void ProductBox_Load(object sender, EventArgs e) {
 
-            ModelPanel = (Panel) MainPanel.Controls[0];
-
-            foreach(Product Product in Products) {
-                InitialProductPanels.Add(Add(Product));
+            if(NumberOfColumns == 0) {
+                NumberOfColumns = Convert.ToInt32(Width / new ProductPanel().Width);
             }
 
         }
 
-        public void Update() {
+        private void AddProduct(Product product) {
 
-            MainPanel.Controls.Clear();
+            ProductPanel productPanel = new ProductPanel();
 
-            for (var index = 0; index < CurrentProductPanels.Count(); index++) {
+            productPanel.Product = product;
+            productPanel.Name = "ProductPanel" + product.ID.ToString();
+            productPanel.ClickBuy += ClickProductBuy;
 
-                Panel Panel = CurrentProductPanels[index];
+            Controls.Add(productPanel);
 
-                if (index != 0) {
-                    Panel lastPanel = CurrentProductPanels[index - 1];
+        }
 
-                    int x = index % NumberOfColumns == 0 ? 0 : lastPanel.Location.X + ModelPanel.Width + PanelMargin;
-                    int y = index % NumberOfColumns == 0 ? lastPanel.Location.Y + ModelPanel.Height + PanelMargin : lastPanel.Location.Y;
+        public void UpdateView() {
 
-                    Panel.Location = new System.Drawing.Point(x, y);
-                } else {
-                    Panel.Location = new System.Drawing.Point(0, 0);
+            Controls.Clear();
+
+            if (Products.Count() > 0) {
+           
+                List<Product> disabledProducts = Products.Where(Product => Product.Quantity == 0).ToList();
+
+                foreach (Product disabledProduct in disabledProducts) {
+                    Products.Remove(disabledProduct);
+                    Products.Add(disabledProduct);
                 }
 
-                MainPanel.Controls.Add(Panel);
+                foreach (Product product in Products) {
+                    AddProduct(product);
+                }
 
-            }
+                List<ProductPanel> productPanels = Controls.Cast<ProductPanel>().ToList();
 
-            if (CurrentProductPanels.Count() == 0) {
+                Populate(productPanels);
+
+            } else {
 
                 Label message = new Label();
 
                 message.Name = "LabelNoProduct";
-                message.Size = new System.Drawing.Size(MainPanel.Width, MainPanel.Height);
-                message.TabIndex = 1;
+                message.Size = new System.Drawing.Size(Width, Height);
                 message.Text = "Nenhum produto encontrado.";
                 message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 message.Location = new System.Drawing.Point(0, 0);
 
-                MainPanel.Controls.Add(message);
+                Controls.Add(message);
 
             }
 
-            LastProductPanels = CurrentProductPanels;
-
         }
 
-        public void Search(string search) {
+        public void Populate(List<ProductPanel> productPanels) {
 
-            CurrentProductPanels = InitialProductPanels.Where(
-                Panel => (Panel.Tag as Product).Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 || ((Panel.Tag as Product).Category != null ? (Panel.Tag as Product).Category.Name.IndexOf(search, StringComparison.OrdinalIgnoreCase) >= 0 : false)
-            ).ToList();
+            for (var index = 0; index < productPanels.Count(); index++) {
 
-        }
+                ProductPanel productPanel = productPanels[index];
+                
+                if (index != 0) {
 
-        public void OrderByAlphabetical() {
-            CurrentProductPanels = CurrentProductPanels.OrderBy(Panel => (Panel.Tag as Product).Name).ToList();
-        }
+                    ProductPanel lastProductPanel = productPanels[index - 1];
 
-        public void OrderByLowestPrice() {
-            CurrentProductPanels = CurrentProductPanels.OrderByDescending(Panel => (Panel.Tag as Product).Value).ToList();
-        }
+                    int x = index % NumberOfColumns == 0 ? 0 : lastProductPanel.Location.X + productPanel.Width + productPanel.Margin.Horizontal;
+                    int y = index % NumberOfColumns == 0 ? lastProductPanel.Location.Y + productPanel.Height + productPanel.Margin.Vertical : lastProductPanel.Location.Y;
 
-        public void OrderByBiggestPrice() {
-            CurrentProductPanels = CurrentProductPanels.OrderBy(Panel => (Panel.Tag as Product).Value).ToList();
-        }
+                    productPanel.Location = new System.Drawing.Point(x, y);
 
-        public void MoveDisabledProductsToEnd() {
+                } else {
 
-            List<Panel> DisabledPanels = CurrentProductPanels.Where(panel => (panel.Tag as Product).Quantity == 0).ToList();
+                    productPanel.Location = new System.Drawing.Point(0, 0);
 
-            foreach (Panel Panel in DisabledPanels) {
-                CurrentProductPanels.Remove(Panel);
-                CurrentProductPanels.Add(Panel);
+                }
+
+                Controls.Add(productPanel);
+
             }
-
-        }
-
-        public Panel Add(Product Product) {
-            Panel ProductPanel = Transform(Product);
-            MainPanel.Controls.Add(ProductPanel);
-
-            return ProductPanel;
-        }
-
-        public Panel Transform(Product Product) {
-
-            Panel Panel = new Panel();
-            List<Control> Model = ModelPanel.Controls.Cast<Control>().ToList();
-
-            int index = InitialProductPanels.Count();
-
-            Panel.BackColor = ModelPanel.BackColor;
-            Panel.Padding = ModelPanel.Padding;
-            Panel.Size = ModelPanel.Size;
-
-            Panel.Name = "PanelProduct" + index.ToString();
-            Panel.Tag = Product;
-
-            Label Name = new Label();
-            Label ModelName = (Model.FirstOrDefault(control => control.Name.Equals("ModelLabelProductName")) as Label);
-
-            Name.Location = ModelName.Location;
-            Name.TextAlign = ModelName.TextAlign;
-            Name.AutoEllipsis = ModelName.AutoEllipsis;
-            Name.Font = ModelName.Font;
-            Name.Size = ModelName.Size;
-
-            Name.Name = "LabelProduct" + index.ToString() + "Name";
-            Name.Text = Product.Name;
-
-            Panel.Controls.Add(Name); 
-
-            Label Value = new Label();
-            Label ModelValue = (Model.FirstOrDefault(control => control.Name.Equals("ModelLabelProductValue")) as Label);
-
-            Value.Font = ModelValue.Font;
-            Value.Location = ModelValue.Location;
-            Value.TextAlign = ModelValue.TextAlign;
-            Value.Size = ModelValue.Size;
-
-            Value.Name = "LabelProduct" + index.ToString() + "Value";
-            Value.Text = "$" + Product.Value.ToString("#.00");
-
-            Panel.Controls.Add(Value);
-
-            PictureBox Image = new PictureBox();
-            PictureBox ModelImage = (Model.FirstOrDefault(control => control.Name.Equals("ModelPictureBoxProductImage")) as PictureBox);
-
-            Image.BackColor = ModelImage.BackColor;
-            Image.Location = ModelImage.Location;
-            Image.Size = ModelImage.Size;
-            Image.SizeMode = ModelImage.SizeMode;
-
-            if (Product.Image != null) {
-                Image.Image = ImageBytefy.ByteArrayToImage(Product.Image);
-            }
-
-            Image.Name = "PictureBoxProduct" + index.ToString() + "Image";
-
-            Panel.Controls.Add(Image);
-
-            Button Buy = new Button();
-            Button ModelBuy = (Model.FirstOrDefault(control => control.Name.Equals("ModelButtonProductBuy")) as Button);
-
-            Buy.FlatStyle = ModelBuy.FlatStyle;
-            Buy.Location = ModelBuy.Location; 
-            Buy.Size = ModelBuy.Size;
-            Buy.Cursor = ModelBuy.Cursor;
-            Buy.UseVisualStyleBackColor = ModelBuy.UseVisualStyleBackColor;
-            Buy.TabStop = ModelBuy.TabStop;
-
-            Buy.Name = "ButtonProduct" + index.ToString();
-            Buy.Click += OnBuy;
-
-            if (Product.Quantity > 0) {
-                Buy.Text = ModelBuy.Text;
-            } else {
-                Buy.Enabled = false;
-                Buy.Text = "Indisponível";
-                Buy.FlatAppearance.BorderColor = Color.White;
-            }
-
-            Panel.Controls.Add(Buy);
-
-            return Panel;
 
         }
 

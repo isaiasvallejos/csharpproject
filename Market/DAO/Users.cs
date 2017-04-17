@@ -3,43 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shop.Models;
 using Shop.App;
+using Shop.Models;
+using Shop.Components;
 
-namespace Shop.DAO
-{
-    class Users
-    {
-        /// <summary>
-        /// Adiciona um novo usuário.
-        /// </summary>
-        public static void Add(User user)
-        {
-            MarketContext db = new MarketContext();
+namespace Shop.DAO {
 
-            db.Users.Add(user);
-            db.SaveChanges();
-        }
+    class Users {
 
-        /// <summary>
-        /// Seleciona um usuário baseado no seus dados de login (nome de usuário e senha).
-        /// </summary>
-        public static User FindOneByLogin(string username, string password)
-        {
-            MarketContext db = new MarketContext();
+        public static User FindOneByLogin(string username, string password) {
+            MarketContext db = MarketSingleContext.Context;
 
-            return db.Users.FirstOrDefault(user => user.Username.Equals(username) && user.Password.Equals(password));
-        }
+            password = Util.Encryptor.MD5Hash(password);
 
-        /// <summary>
-        /// Seleciona um usuário baseado no seu nome de usuário.
-        /// </summary>
-        public static User FindOneByUsername(string username)
-        {
-            MarketContext db = new MarketContext();
-
-            return db.Users.FirstOrDefault(user => user.Username.Equals(username));
+            return db.Users
+                .FirstOrDefault(user => user.Username.Equals(username) && user.Password.Equals(password));
         }
 
     }
+
 }

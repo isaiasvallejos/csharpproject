@@ -10,35 +10,31 @@ namespace Shop.DAO
 {
     class Categories
     {
-        /// <summary>
-        /// Adiciona uma nova categoria.
-        /// </summary>
-        public static void Add(Category category)
-        {
-            MarketContext db = new MarketContext();
 
-            db.Categories.Add(category);
+        public static void Add(Category Category)
+        {
+            MarketContext db = MarketSingleContext.Context;
+
+            db.Categories.Add(Category);
             db.SaveChanges();
         }
 
-        /// <summary>
-        /// Seleciona uma categoria baseada no seu nome.
-        /// </summary>
-        public static Category FindOneByName(string name)
+        public static Category FindOneByName(string Name)
         {
-            MarketContext db = new MarketContext();
-
-            return db.Categories.FirstOrDefault(category => category.Name.Equals(name));
-        }
-
-        /// <summary>
-        /// Lista todos as categorias.
-        /// </summary>
-        public static List<Category> List() {
-            MarketContext db = new MarketContext();
+            MarketContext db = MarketSingleContext.Context;
 
             return db.Categories
-                    .ToList();
+                .Include("Products")
+                .FirstOrDefault(category => category.Name.Equals(Name));            
+        }
+
+        public static List<Category> List() {
+
+            MarketContext db = MarketSingleContext.Context;
+
+            return db.Categories
+                .Include("Products")
+                .ToList();
         }
 
     }

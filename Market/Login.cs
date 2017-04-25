@@ -62,13 +62,18 @@ namespace Shop {
 
             try {
 
-                User user = DAO.Users.FindOneByLogin(TextBoxUsername.Text, TextBoxPassword.Text);
+                Customer customer = DAO.Customers.FindOneByLogin(TextBoxUsername.Text, TextBoxPassword.Text);
 
-                if (user != null && user is Customer) {
+                if (customer != null && customer is Customer) {
 
-                    Session.Login(user);
+                    Session.Login(customer);
                     Main.Menu.Customer = (Customer)Session.User;
                     Main.Menu.UpdateView();
+
+                    if (Login != null) {
+                        Hide();
+                        Login(this, EventArgs.Empty);
+                    }
 
                     Close();
 
@@ -94,10 +99,6 @@ namespace Shop {
 
         private void TextBoxUsername_KeyPress(object sender, KeyPressEventArgs e) {
             e.Handled = (e.KeyChar == (char) Keys.Space);
-        }
-
-        private void FormLogin_FormClosed(object sender, FormClosedEventArgs e) {
-            if (Login != null) Login(this, EventArgs.Empty);
         }
 
     }

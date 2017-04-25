@@ -53,7 +53,7 @@ namespace Shop.Components {
 
                 message.Name = "LabelNoProduct";
                 message.Size = new System.Drawing.Size(Width, Height);
-                message.Text = "Carrinho vazio";
+                message.Text = "Carrinho vazio.";
                 message.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 message.Location = new System.Drawing.Point(0, 0);
 

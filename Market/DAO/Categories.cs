@@ -6,35 +6,63 @@ using System.Threading.Tasks;
 using Shop.Models;
 using Shop.App;
 
-namespace Shop.DAO
-{
-    class Categories
-    {
+namespace Shop.DAO {
 
-        public static void Add(Category Category)
-        {
-            MarketContext db = MarketSingleContext.Context;
+    class Categories {
 
-            db.Categories.Add(Category);
-            db.SaveChanges();
+        /// <summary>
+        /// Adiciona uma nova categoria.
+        /// </summary>
+        /// <param name="category"></param>
+        public static void Add(Category category) {
+
+            using (ShopContext db = new ShopContext()) {
+
+                if (category.Products != null) {
+
+                    // Remove os produtos da categoria do contexto
+                    category.Products = null;
+
+                }
+
+                db.Categories.Add(category);
+                db.SaveChanges();
+
+            }
+
         }
 
-        public static Category FindOneByName(string Name)
-        {
-            MarketContext db = MarketSingleContext.Context;
+        /// <summary>
+        /// Encontra uma categoria pelo seu nome.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static Category FindOneByName(string name) {
 
-            return db.Categories
-                .Include("Products")
-                .FirstOrDefault(category => category.Name.Equals(Name));            
+            using (ShopContext db = new ShopContext()) {
+
+                return db.Categories
+                    .Include("Products")
+                    .FirstOrDefault(category => category.Name.Equals(name));
+
+            }
+
         }
 
+        /// <summary>
+        /// Lista todas as categorias.
+        /// </summary>
+        /// <returns></returns>
         public static List<Category> List() {
 
-            MarketContext db = MarketSingleContext.Context;
+            using (ShopContext db = new ShopContext()) {
 
-            return db.Categories
-                .Include("Products")
-                .ToList();
+                return db.Categories
+                    .Include("Products")
+                    .ToList();
+
+            }
+
         }
 
     }

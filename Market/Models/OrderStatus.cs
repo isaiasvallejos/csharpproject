@@ -10,6 +10,7 @@ namespace Shop.Models {
 
         public const string Canceled = "Cancelado";
         public const string Pending = "Pendente";
+        public const string Approved = "Aprovado";
         public const string Delivered = "Entregue";
 
     }

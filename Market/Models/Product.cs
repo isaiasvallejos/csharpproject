@@ -22,6 +22,11 @@ namespace Shop.Models {
             set;
         }
 
+        public Category Category {
+            get;
+            set;
+        }
+
         public string Name {
             get;
             set;
@@ -67,22 +72,15 @@ namespace Shop.Models {
             set;
         }
 
-        public Category Category {
-            get;
-            set;
-        }
-
         [NotMapped]
         public double PromotionValue {
 
             get {
-                double adjustment = Math.Pow(10, 1);
-                double value = Value - (Value * PromotionPercentage / 100);
 
-                return Math.Floor(value * adjustment) / adjustment; 
+                return Business.Products.CalculatePromotionValue(this);
+
             }
 
-            set { }
         }
 
     }

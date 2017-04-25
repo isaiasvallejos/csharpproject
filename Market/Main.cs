@@ -38,22 +38,27 @@ namespace Shop
             Menu.Logout += Menu_Logout;
             Menu.Admin += Menu_Admin;
             Menu.Register += Menu_Register;
+            Menu.Profile += Menu_Profile;
+            Menu.Order += Menu_Order;
 
         }
 
         private void Reset() {
 
             ProductBox.Products = DAO.Products.List();
+            ProductBox.Products = ProductBox.Products.OrderBy(Product => !Product.Promotion).ThenByDescending(Product => Product.PromotionPercentage).ToList();
             ProductBox.UpdateView();
 
             CartPanel.Order.Products.Clear();
             CartPanel.CartProductBox.UpdateView();
+            CartPanel.UpdateView();
 
         }
 
         private void Reload() {
 
             ProductBox.Products = DAO.Products.List();
+            ProductBox.Products = ProductBox.Products.OrderBy(Product => !Product.Promotion).ThenByDescending(Product => Product.PromotionPercentage).ToList();
             ProductBox.UpdateView();
 
         }
@@ -74,8 +79,22 @@ namespace Shop
 
         public void Menu_Admin(object sender, EventArgs e) {
 
-            FormLoginAdmin login = new FormLoginAdmin(this);
-            login.ShowDialog();
+            //FormLoginAdmin login = new FormLoginAdmin(this);
+            //login.ShowDialog();
+
+        }
+
+        public void Menu_Profile(object sender, EventArgs e) {
+
+            FormProfile profile = new FormProfile(this);
+            profile.ShowDialog();
+
+        }
+
+        public void Menu_Order(object sender, EventArgs e) {
+
+            FormProfileOrder orders = new FormProfileOrder();
+            orders.ShowDialog();
 
         }
 
@@ -117,17 +136,20 @@ namespace Shop
             CartPanel.Order.CreatedAt = DateTime.Now;
             CartPanel.Order.UpdatedAt = DateTime.Now;
 
-            try {
+            try
+            {
 
                 DAO.Orders.Add(CartPanel.Order);
-
                 MessageBox.Show("Pedido inserido com sucesso.");
+
+                Session.User = DAO.Customers.FindOneByUsername(Session.User.Username);
 
                 Reset();
 
-            } catch {
-                MessageBox.Show("ERRO!");
-            }            
+            } catch
+            {
+                MessageBox.Show("Ocorreu um erro interno, tente novamente mais tarde.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }   
 
         }
 
@@ -157,7 +179,7 @@ namespace Shop
 
             }
 
-            CartPanel.UpdateCartTotals();
+            CartPanel.UpdateView();
 
         }
 
@@ -167,7 +189,18 @@ namespace Shop
             CartProductPanel CartProductPanel = (NumericCartProductQuantity.Parent as CartProductPanel);
 
             OrderProduct CartProduct = CartProductPanel.CartProduct;
-            CartProduct.Quantity = Convert.ToInt16(NumericCartProductQuantity.Value);
+
+            if (CartProduct.Quantity < Convert.ToInt16(NumericCartProductQuantity.Value)) {
+
+                CartProduct.Quantity++;
+                CartProduct.Product.Quantity--;
+
+            } else {
+
+                CartProduct.Quantity--;
+                CartProduct.Product.Quantity++;
+
+            }
 
             if (CartProduct.Product.Promotion) {
                 CartProductPanel.LabelCartProductValue.Text = "$" + (CartProduct.Quantity * CartProduct.Product.PromotionValue).ToString("0.00");
@@ -175,7 +208,7 @@ namespace Shop
                 CartProductPanel.LabelCartProductValue.Text = "$" + (CartProduct.Quantity * CartProduct.Product.Value).ToString("0.00");
             }
 
-            CartPanel.UpdateCartTotals();
+            CartPanel.UpdateView();
 
         }
 
@@ -226,8 +259,5 @@ namespace Shop
 
         }
 
-        private void PictureBoxLogo_Click(object sender, EventArgs e) {
-            Reload();
-        }
     }
 }

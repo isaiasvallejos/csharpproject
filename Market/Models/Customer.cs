@@ -4,19 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shop.Models
-{
-    public class Customer : User
-    {
+namespace Shop.Models {
 
-        public string Phone
-        {
+    public class Customer : User {
+
+        public string Phone {
             get;
             set;
         }
 
-        public string Document
-        {
+        public string Document {
             get;
             set;
         }
@@ -28,6 +25,7 @@ namespace Shop.Models
 
         public List<Order> Orders {
             get;
+            set;
         }
 
         public Customer() {

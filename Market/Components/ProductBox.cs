@@ -46,6 +46,8 @@ namespace Shop.Components {
 
             Controls.Clear();
 
+            Cursor.Current = Cursors.WaitCursor;
+
             if (Products.Count() > 0) {
            
                 List<Product> disabledProducts = Products.Where(Product => Product.Quantity == 0).ToList();
@@ -76,6 +78,8 @@ namespace Shop.Components {
                 Controls.Add(message);
 
             }
+
+            Cursor.Current = Cursors.Default;
 
         }
 

@@ -8,6 +8,10 @@ namespace Shop.DAO {
 
     class States {
 
+        /// <summary>
+        /// Lista todos os estados.
+        /// </summary>
+        /// <returns></returns>
         public static string[] List() {
 
             return new string[] {

@@ -84,7 +84,11 @@ namespace Shop {
         }
 
         private bool ValidateStepOne() {
-            return !TextBoxUsername.Text.Equals("") && TextBoxUsername.Text != null && !TextBoxPassword.Text.Equals("") && TextBoxPassword.Text != null && !TextBoxConfirmPassword.Text.Equals("") && TextBoxConfirmPassword.Text != null;
+
+            return !TextBoxUsername.Text.Equals("") && TextBoxUsername.Text != null && 
+                   !TextBoxPassword.Text.Equals("") && TextBoxPassword.Text != null && 
+                   !TextBoxConfirmPassword.Text.Equals("") && TextBoxConfirmPassword.Text != null;
+
         }
 
         private bool ValidateUsername() {
@@ -111,7 +115,7 @@ namespace Shop {
             try {
 
                 if (!ValidateDocument()) {
-                    MessageBox.Show("Cliente já cadastrado.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("CPF já cadastrado.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     TextBoxName.Focus();
 
                     return;
@@ -139,7 +143,13 @@ namespace Shop {
         }
 
         private bool ValidateStepTwo() {
-            return !TextBoxName.Text.Equals("") && TextBoxName.Text != null && !TextBoxEmail.Text.Equals("") && TextBoxEmail.Text != null && !TextBoxDocument.Text.Equals("") && TextBoxDocument.Text != null && TextBoxDocument.MaskFull && !TextBoxPhone.Text.Equals("") && TextBoxPhone.Text != null;
+
+            return !TextBoxName.Text.Equals("") && TextBoxName.Text != null && 
+                   !TextBoxEmail.Text.Equals("") && TextBoxEmail.Text != null && 
+                   !TextBoxDocument.Text.Equals("") && TextBoxDocument.Text != null && 
+                   TextBoxDocument.MaskFull && 
+                   !TextBoxPhone.Text.Equals("") && TextBoxPhone.Text != null;
+
         }
 
         private bool ValidateDocument() {
@@ -188,7 +198,13 @@ namespace Shop {
         }
 
         private bool ValidateStepThree() {
-            return !TextBoxAddressName.Text.Equals("") && TextBoxAddressName.Text != null && !TextBoxAddressZipCode.Text.Equals("") && TextBoxAddressZipCode.Text != null && TextBoxAddressZipCode.MaskFull && !ComboBoxAddressCity.GetItemText(ComboBoxAddressCity.SelectedItem).Equals("") && !ComboBoxAddressState.GetItemText(ComboBoxAddressState.SelectedItem).Equals("");
+
+            return !TextBoxAddressName.Text.Equals("") && TextBoxAddressName.Text != null && 
+                   !TextBoxAddressZipCode.Text.Equals("") && TextBoxAddressZipCode.Text != null && 
+                   TextBoxAddressZipCode.MaskFull && 
+                   !ComboBoxAddressCity.GetItemText(ComboBoxAddressCity.SelectedItem).Equals("") && 
+                   !ComboBoxAddressState.GetItemText(ComboBoxAddressState.SelectedItem).Equals("");
+
         }
 
     }

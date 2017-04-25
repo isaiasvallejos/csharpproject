@@ -21,7 +21,7 @@ namespace Shop.Models {
             get;
             set;
         }
-
+        
         public string City {
             get;
             set;
@@ -36,7 +36,7 @@ namespace Shop.Models {
             get;
             set;
         }
-       
+
         public Customer Customer {
             get;
             set;

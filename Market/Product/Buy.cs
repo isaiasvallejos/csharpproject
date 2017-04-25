@@ -41,27 +41,15 @@ namespace Shop {
             TextBoxDescription.Text = Product.Description;
             PictureBoxImage.Image = Util.ImageConverter.ByteArrayToImage(Product.Image);
 
-            OrderProduct existentCartProduct = Main.CartPanel.Order.Products.FirstOrDefault(cartProduct => cartProduct.Product.Equals(Product));
+            if (Product.Quantity > 0) {
 
-            if (existentCartProduct != null) {
-
-                int quantity = Product.Quantity - existentCartProduct.Quantity;
-
-                if (quantity > 0) {
-
-                    NumericQuantity.Maximum = quantity;
-
-                } else {
-
-                    NumericQuantity.Maximum = 0;
-                    NumericQuantity.Enabled = false;
-                    ButtonBuy.Enabled = false;
-
-                }
+                NumericQuantity.Maximum = Product.Quantity;
 
             } else {
 
-                NumericQuantity.Maximum = Product.Quantity;
+                NumericQuantity.Maximum = 0;
+                NumericQuantity.Enabled = false;
+                ButtonBuy.Enabled = false;
 
             }
                         
@@ -87,6 +75,7 @@ namespace Shop {
             OrderProduct cartProduct = new OrderProduct();
             cartProduct.Product = Product;
             cartProduct.Quantity = Convert.ToInt16(NumericQuantity.Value);
+            cartProduct.Product.Quantity = cartProduct.Product.Quantity - cartProduct.Quantity;
 
             if (Product.Promotion) {
                 cartProduct.Value = Product.PromotionValue;
@@ -103,7 +92,7 @@ namespace Shop {
             }
 
             Main.CartPanel.CartProductBox.UpdateView();
-            Main.CartPanel.UpdateCartTotals();
+            Main.CartPanel.UpdateView();
 
             Close();
         }

@@ -22,11 +22,6 @@ namespace Shop.Models {
             set;
         }
 
-        public string Payment {
-            get;
-            set;
-        }
-
         public Customer Customer {
             get;
             set;
@@ -37,30 +32,9 @@ namespace Shop.Models {
             set;
         }
 
-        public double DiscountValue {
-            get {
-
-                return (ProductsValue + ShippingValue) * DiscountPercentage / 100;
-
-            }
-
-            set {
-                DiscountValue = value;
-            }
-        }
-
-        public double ShippingValue {
-
-            get {
-
-                double ShippingValuePerProduct = 1.50;
-                return Products.Aggregate(0.00, (Sum, CartProduct) => Sum + (CartProduct.Quantity * ShippingValuePerProduct));
-
-            }
-
-            set {
-                ShippingValue = value;
-            }
+        public string Payment {
+            get;
+            set;
         }
 
         public string Status {
@@ -78,16 +52,35 @@ namespace Shop.Models {
             set;
         }
 
-        [NotMapped]
-        public double ProductsValue {
-            
+        public double DiscountValue {
+
             get {
 
-                return Products.Aggregate(0.00, (Sum, CartProduct) => Sum + (CartProduct.Value * CartProduct.Quantity));
+                return Business.Orders.CalculateDiscountValue(this);
 
             }
 
-            set { }
+        }
+
+        public double ShippingValue {
+
+            get {
+
+                return Business.Orders.CalculateShippingValue(this);
+
+            }
+
+        }
+
+        [NotMapped]
+        public double ProductsValue {
+
+            get {
+
+                return Business.Orders.CalculateProductsValue(this);
+
+            }
+
         }
 
         [NotMapped]

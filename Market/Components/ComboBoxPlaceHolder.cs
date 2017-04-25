@@ -22,8 +22,6 @@ namespace Shop.Components {
             base.OnCreateControl();
 
             if (!this.DesignMode) {
-                base.Items.Clear();
-
                 base.ForeColor = System.Drawing.SystemColors.ControlDark;
                 base.Items.Insert(0, PlaceHolderText);
                 base.SelectedIndex = 0;

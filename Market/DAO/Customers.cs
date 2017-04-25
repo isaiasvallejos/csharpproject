@@ -7,37 +7,104 @@ using System.Data.Entity;
 using Shop.Models;
 using Shop.App;
 
-namespace Shop.DAO
-{
-    class Customers
-    {
+namespace Shop.DAO {
 
-        public static void Add(Customer customer)
-        {
-            MarketContext db = MarketSingleContext.Context;
+    class Customers {
 
-            customer.Password = Util.Encryptor.MD5Hash(customer.Password);
+        /// <summary>
+        /// Adiciona um novo cliente.
+        /// </summary>
+        /// <param name="customer"></param>
+        public static void Add(Customer customer) {
 
-            db.Users.Add(customer);
-            db.SaveChanges();
+            using (ShopContext db = new ShopContext()) {
+
+                // Encripta a senha para MD5
+                customer.Password = Util.Encryptor.MD5Hash(customer.Password);
+
+                db.Users.Add(customer);
+                db.SaveChanges();
+
+            }
+
         }
 
-        public static Customer FindOneByUsername(string username)
-        {
-            MarketContext db = MarketSingleContext.Context;
+        /// <summary>
+        /// Atualiza um cliente.
+        /// </summary>
+        /// <param name="customer"></param>
+        public static void Update(Customer customer) {
 
-            return db.Customers
-                .Include("Address")
-                .FirstOrDefault(user => user.Username.Equals(username));
+            using (ShopContext db = new ShopContext()) {
+
+                // Vincula o cliente ao contexto
+                db.Customers.Attach(customer);
+
+                // Altera seu estado para modificado
+                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(customer.Address).State = EntityState.Modified;
+
+                db.SaveChanges();
+
+            }
+
         }
 
-        public static Customer FindOneByDocument(string document) 
-        {
-            MarketContext db = MarketSingleContext.Context;
+        /// <summary>
+        /// Encontra um cliente pelo seu nome de usuário.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public static Customer FindOneByUsername(string username) {
 
-            return db.Customers
-                .Include("Address")
-                .FirstOrDefault(user => user.Document.Equals(document));
+            using (ShopContext db = new ShopContext()) {
+
+                return db.Customers
+                    .Include("Address")
+                    .Include("Orders.Products.Product")
+                    .FirstOrDefault(user => user.Username.Equals(username));
+
+            }
+
+        }
+
+        /// <summary>
+        /// Encontra um cliente pelo seu nº de documento (CPF).
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public static Customer FindOneByDocument(string document) {
+
+            using (ShopContext db = new ShopContext()) {
+
+                return db.Customers
+                    .Include("Address")
+                    .Include("Orders.Products.Product")
+                    .FirstOrDefault(user => user.Document.Equals(document));
+
+            }
+
+        }
+
+        /// <summary>
+        /// Encontra um cliente pelo seu nome de usuário e senha (login).
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static Customer FindOneByLogin(string username, string password) {
+
+            using (ShopContext db = new ShopContext()) {
+
+                password = Util.Encryptor.MD5Hash(password);
+
+                return db.Customers
+                    .Include("Address")
+                    .Include("Orders.Products.Product")
+                    .FirstOrDefault(customer => customer.Username.Equals(username) && customer.Password.Equals(password));
+
+            }
+
         }
 
     }

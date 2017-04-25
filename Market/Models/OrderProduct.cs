@@ -16,6 +16,16 @@ namespace Shop.Models {
             set;
         }
 
+        public int Quantity {
+            get;
+            set;
+        }
+
+        public double Value {
+            get;
+            set;
+        }
+
         [ForeignKey("Order")]
         public int OrderID {
             get;
@@ -36,20 +46,6 @@ namespace Shop.Models {
         public Product Product {
             get;
             set;
-        }
-
-        public int Quantity {
-            get;
-            set;
-        }
-
-        public double Value {
-            get;
-            set;
-        }
-
-        public OrderProduct() {
-            Product = new Product();
         }
 
     }

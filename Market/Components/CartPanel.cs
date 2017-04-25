@@ -27,7 +27,7 @@ namespace Shop.Components {
             CartProductBox.UpdateView();
         }
 
-        public void UpdateCartTotals() {
+        public void UpdateView() {
             LabelCartProductsValue.Text = "$" + Order.ProductsValue.ToString("0.00");
             LabelCartShippingValue.Text = "$" + Order.ShippingValue.ToString("0.00");
             LabelCartDiscountValue.Text = "-$" + Order.DiscountValue.ToString("0.00");
@@ -58,7 +58,7 @@ namespace Shop.Components {
             }
 
             ButtonCartFinish.Focus();
-            UpdateCartTotals();
+            UpdateView();
 
         }
 

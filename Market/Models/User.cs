@@ -6,49 +6,42 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Shop.Models
-{
-    public class User
-    {
+namespace Shop.Models {
+
+    public class User {
+
         [Key]
-        public int ID
-        {
+        public int ID {
             get;
             set;
         }
 
-        public string Username
-        {
+        public string Username {
             get;
             set;
         }
 
-        public string Password
-        {
+        public string Password {
             get;
             set;
         }
 
-        public string Name
-        {
+        public string Name {
             get;
             set;
         }
 
-        public string Email
-        {
+        public string Email {
             get;
             set;
         }
 
-        public DateTime CreatedAt
-        {
+        public DateTime CreatedAt {
             get;
             set;
         }
 
-        public DateTime UpdatedAt
-        {
+        public DateTime UpdatedAt {
             get;
             set;
         }

@@ -1,0 +1,21 @@
+﻿
+@ TODO LIST
+
+[X] - Ajustar login para padrão visual atual
+[ ] - Criar listagem de pedidos no perfil de cliente
+[ ] - Atualizar Session Customer Orders
+[ ] - Criar painel administrativo:
+		[ ] - Listagem de produtos:
+			[ ] - Criar/Editar produto
+		[ ] - Listagem de pedidos (ordenado por novos pedidos)
+			[ ] - Visualizar pedido
+			[ ] - Alterar status
+		[ ] - Listagem de clientes
+			[ ] - Visualizar cliente
+		[ ] - Total em vendas
+		[ ] - Total de clientes
+		[ ] - Produto mais vendido
+		[ ] - Produto menos vendido
+		[ ] - Configurações da loja
+[ ] - Painel de iniciação do programa
+		

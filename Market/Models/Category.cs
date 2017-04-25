@@ -6,32 +6,27 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Shop.Models
-{
-    public class Category
-    {
+namespace Shop.Models {
+
+    public class Category {
 
         [Key]
-        public int ID
-        {
+        public int ID {
             get;
             set;
         }
 
-        public string Name
-        {
+        public string Name {
             get;
             set;
         }
 
-        public DateTime CreatedAt
-        {
+        public DateTime CreatedAt {
             get;
             set;
         }
 
-        public DateTime UpdatedAt
-        {
+        public DateTime UpdatedAt {
             get;
             set;
         }
@@ -46,4 +41,5 @@ namespace Shop.Models
         }
 
     }
+
 }

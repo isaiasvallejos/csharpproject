@@ -8,6 +8,10 @@ namespace Shop.DAO {
 
     class Cities {
 
+        /// <summary>
+        /// Lista todas as cidades.
+        /// </summary>
+        /// <returns></returns>
         public static string[] List() {
 
             return new string[] {

@@ -44,7 +44,7 @@ namespace Shop.Components {
                     }
 
                     NumericCartProductQuantity.Value = value.Quantity;
-                    NumericCartProductQuantity.Maximum = value.Product.Quantity;
+                    NumericCartProductQuantity.Maximum = value.Product.Quantity + value.Quantity;
 
                 }
 

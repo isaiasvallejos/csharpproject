@@ -31,7 +31,7 @@ namespace Shop.Models {
             set;
         }
 
-        public string Email {
+        public bool Enabled {
             get;
             set;
         }

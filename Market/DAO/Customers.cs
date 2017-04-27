@@ -107,5 +107,40 @@ namespace Shop.DAO {
 
         }
 
+        /// <summary>
+        /// Lista todos os clientes.
+        /// </summary>
+        /// <returns></returns>
+        public static List<Customer> ListEnableds() {
+
+            using (ShopContext db = new ShopContext()) {
+
+                return db.Customers
+                    .Include("Address")
+                    .Include("Orders.Products.Product")
+                    .Where(customer => customer.Enabled)
+                    .ToList();
+
+            }
+
+        }
+
+        /// <summary>
+        /// Desabilita um cliente.
+        /// </summary>
+        /// <param name="customer"></param>
+        public static void Disable(Customer customer) {
+
+            using (ShopContext db = new ShopContext()) {
+                customer.Enabled = false;
+
+                db.Customers.Attach(customer);
+                db.Entry(customer).Property(p => p.Enabled).IsModified = true;
+                db.SaveChanges();
+
+            }
+
+        }
+
     }
 }

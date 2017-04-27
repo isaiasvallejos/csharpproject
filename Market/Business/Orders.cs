@@ -16,7 +16,10 @@ namespace Shop.Business {
         /// <returns></returns>
         public static double CalculateDiscountValue(Order order) {
 
-            return (CalculateProductsValue(order) + CalculateShippingValue(order)) * order.DiscountPercentage / 100;
+            double adjustment = Math.Pow(10, 1);
+            double value = (CalculateProductsValue(order) + CalculateShippingValue(order)) * order.DiscountPercentage / 100;
+
+            return Math.Floor(value * adjustment) / adjustment;
 
         }
 
@@ -27,7 +30,10 @@ namespace Shop.Business {
         /// <returns></returns>
         public static double CalculateProductsValue(Order order) {
 
-            return order.Products.Aggregate(0.00, (sum, cartProduct) => sum + (cartProduct.Value * cartProduct.Quantity));
+            double adjustment = Math.Pow(10, 1);
+            double value = order.Products.Aggregate(0.00, (sum, cartProduct) => sum + (cartProduct.Value * cartProduct.Quantity));
+
+            return Math.Floor(value * adjustment) / adjustment;
 
         }
 
@@ -40,7 +46,10 @@ namespace Shop.Business {
 
             double valuePerProduct = 1.50;
 
-            return order.Products.Aggregate(0.00, (sum, cartProduct) => sum + (cartProduct.Quantity * valuePerProduct));
+            double adjustment = Math.Pow(10, 1);
+            double value = order.Products.Aggregate(0.00, (sum, cartProduct) => sum + (cartProduct.Quantity * valuePerProduct));
+
+            return Math.Floor(value * adjustment) / adjustment;
 
         }
 

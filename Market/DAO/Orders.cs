@@ -31,19 +31,69 @@ namespace Shop.DAO {
 
                 if(order.Products != null) {
 
-                    order.Products.ForEach(delegate (OrderProduct product) {
+                    order.Products.ForEach(delegate (OrderProduct orderProduct) {
 
                         // Vincula o produto ao contexto
-                        db.Products.Attach(product.Product);
+                        db.Products.Attach(orderProduct.Product);
 
                         // Altera o estado do atributo de estoque para modificado
-                        db.Entry(product.Product).Property(p => p.Quantity).IsModified = true;
+                        db.Entry(orderProduct.Product).Property(p => p.Quantity).IsModified = true;
 
                     });
 
                 }
 
                 db.Orders.Add(order);
+                db.SaveChanges();
+
+            }
+
+        }
+
+        /// <summary>
+        /// Adiciona um novo pedido.
+        /// </summary>
+        /// <param name="order"></param>
+        public static void Update(Order order) {
+
+            using (ShopContext db = new ShopContext()) {
+
+                if (order.Customer != null) {
+
+                    // Referencia o cliente ao pedido
+                    order.CustomerID = order.Customer.ID;
+
+                    // Remove o cliente do pedido do contexto
+                    order.Customer = null;
+
+                }
+
+                if (order.Products != null) {
+
+                    if (order.Status.Equals("Cancelado")) {
+
+                        order.Products.ForEach(delegate (OrderProduct orderProduct) {
+
+                            // Retrocede o estoque do produto
+                            orderProduct.Product.Quantity = orderProduct.Quantity + orderProduct.Product.Quantity;
+
+                            // Vincula o produto ao contexto
+                            db.Products.Attach(orderProduct.Product);
+
+                            // Altera o estado do atributo de estoque para modificado
+                            db.Entry(orderProduct.Product).Property(p => p.Quantity).IsModified = true;
+
+                        });
+
+                    } else {   
+                        order.Products = null;
+                    }
+
+                }
+
+                db.Orders.Attach(order);
+                db.Entry(order).State = EntityState.Modified;
+
                 db.SaveChanges();
 
             }

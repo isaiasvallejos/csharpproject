@@ -22,7 +22,7 @@ namespace Shop
 
         private void FormMain_Load(object sender, EventArgs e) { 
 
-            ProductBox.Products = DAO.Products.List();  
+            ProductBox.Products = DAO.Products.ListEnableds();  
             ProductBox.ClickProductBuy += ProductBox_ClickProductBuy;
 
             ProductBox.UpdateView();
@@ -43,9 +43,9 @@ namespace Shop
 
         }
 
-        private void Reset() {
+        public void Reset() {
 
-            ProductBox.Products = DAO.Products.List();
+            ProductBox.Products = DAO.Products.ListEnableds();
             ProductBox.Products = ProductBox.Products.OrderBy(Product => !Product.Promotion).ThenByDescending(Product => Product.PromotionPercentage).ToList();
             ProductBox.UpdateView();
 
@@ -55,9 +55,9 @@ namespace Shop
 
         }
 
-        private void Reload() {
+        public void Reload() {
 
-            ProductBox.Products = DAO.Products.List();
+            ProductBox.Products = DAO.Products.ListEnableds();
             ProductBox.Products = ProductBox.Products.OrderBy(Product => !Product.Promotion).ThenByDescending(Product => Product.PromotionPercentage).ToList();
             ProductBox.UpdateView();
 
@@ -79,8 +79,8 @@ namespace Shop
 
         public void Menu_Admin(object sender, EventArgs e) {
 
-            //FormLoginAdmin login = new FormLoginAdmin(this);
-            //login.ShowDialog();
+            FormLoginAdmin login = new FormLoginAdmin(this);
+            login.ShowDialog();
 
         }
 
@@ -131,25 +131,27 @@ namespace Shop
                 return;
             }
 
-            CartPanel.Order.Customer = (Customer)Session.User;
-            CartPanel.Order.Status = OrderStatus.Pending;
-            CartPanel.Order.CreatedAt = DateTime.Now;
-            CartPanel.Order.UpdatedAt = DateTime.Now;
+            if (MessageBox.Show("Tem certeza que deseja confirmar seu pedido?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.Yes)) {
 
-            try
-            {
+                CartPanel.Order.Customer = (Customer)Session.User;
+                CartPanel.Order.Status = OrderStatus.Pending;
+                CartPanel.Order.CreatedAt = DateTime.Now;
+                CartPanel.Order.UpdatedAt = DateTime.Now;
 
-                DAO.Orders.Add(CartPanel.Order);
-                MessageBox.Show("Pedido inserido com sucesso.");
+                try {
 
-                Session.User = DAO.Customers.FindOneByUsername(Session.User.Username);
+                    DAO.Orders.Add(CartPanel.Order);
+                    MessageBox.Show("Pedido inserido com sucesso.");
 
-                Reset();
+                    Session.User = DAO.Customers.FindOneByUsername(Session.User.Username);
 
-            } catch
-            {
-                MessageBox.Show("Ocorreu um erro interno, tente novamente mais tarde.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }   
+                    Reset();
+
+                } catch {
+                    MessageBox.Show("Ocorreu um erro interno, tente novamente mais tarde.", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
 
         }
 
@@ -247,13 +249,24 @@ namespace Shop
 
             if (e.KeyCode == Keys.Enter) {
 
-                ProductBox.Products = DAO.Products.List().Where(
+                ProductBox.Products = DAO.Products.ListEnableds().Where(
                     Product => Product.Name.IndexOf(TextBoxSearch.TextOnly, StringComparison.OrdinalIgnoreCase) >= 0 || Product.Category.Name.IndexOf(TextBoxSearch.TextOnly, StringComparison.OrdinalIgnoreCase) >= 0
                 ).ToList();
 
                 ComboBoxOrderBy_SelectedIndexChanged(ComboBoxOrderBy, EventArgs.Empty);
 
                 ProductBox.UpdateView();
+
+            }
+
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e) {
+
+            if (DAO.Managers.List().Count() == 0) {
+
+                FormStart start = new FormStart();
+                start.ShowDialog();
 
             }
 

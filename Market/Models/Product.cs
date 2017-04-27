@@ -62,6 +62,11 @@ namespace Shop.Models {
             set;
         }
 
+        public bool Enabled {
+            get;
+            set;
+        }
+
         public DateTime CreatedAt {
             get;
             set;

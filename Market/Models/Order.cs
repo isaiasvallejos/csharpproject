@@ -52,21 +52,28 @@ namespace Shop.Models {
             set;
         }
 
-        public double DiscountValue {
-
-            get {
-
-                return Business.Orders.CalculateDiscountValue(this);
-
-            }
-
+        public int DiscountPercentage {
+            get;
+            set;
         }
 
+        [NotMapped]
         public double ShippingValue {
 
             get {
 
                 return Business.Orders.CalculateShippingValue(this);
+
+            }
+
+        }
+
+        [NotMapped]
+        public double DiscountValue {
+
+            get {
+
+                return Business.Orders.CalculateDiscountValue(this);
 
             }
 
@@ -81,12 +88,6 @@ namespace Shop.Models {
 
             }
 
-        }
-
-        [NotMapped]
-        public int DiscountPercentage {
-            get;
-            set;
         }
 
         public Order() {

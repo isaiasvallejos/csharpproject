@@ -24,14 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-            this.PanelLoginOrRegister = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ButtonAdmin = new System.Windows.Forms.Button();
-            this.PictureBoxRegister = new System.Windows.Forms.PictureBox();
-            this.PictureBoxLogin = new System.Windows.Forms.PictureBox();
-            this.ButtonRegister = new System.Windows.Forms.Button();
-            this.ButtonLogin = new System.Windows.Forms.Button();
-            this.LabelLoginOrRegister = new System.Windows.Forms.Label();
             this.ButtonLogout = new System.Windows.Forms.Button();
             this.PanelProfile = new System.Windows.Forms.Panel();
             this.PictureBoxLogout = new System.Windows.Forms.PictureBox();
@@ -40,134 +32,23 @@
             this.PictureBoxProfile = new System.Windows.Forms.PictureBox();
             this.ButtonProfile = new System.Windows.Forms.Button();
             this.LabelWelcome = new System.Windows.Forms.Label();
-            this.PanelLoginOrRegister.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRegister)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogin)).BeginInit();
+            this.LabelLoginOrRegister = new System.Windows.Forms.Label();
+            this.ButtonLogin = new System.Windows.Forms.Button();
+            this.ButtonRegister = new System.Windows.Forms.Button();
+            this.PictureBoxLogin = new System.Windows.Forms.PictureBox();
+            this.PictureBoxRegister = new System.Windows.Forms.PictureBox();
+            this.ButtonAdmin = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PanelLoginOrRegister = new System.Windows.Forms.Panel();
             this.PanelProfile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRegister)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.PanelLoginOrRegister.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // PanelLoginOrRegister
-            // 
-            this.PanelLoginOrRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.PanelLoginOrRegister.Controls.Add(this.pictureBox1);
-            this.PanelLoginOrRegister.Controls.Add(this.ButtonAdmin);
-            this.PanelLoginOrRegister.Controls.Add(this.PictureBoxRegister);
-            this.PanelLoginOrRegister.Controls.Add(this.PictureBoxLogin);
-            this.PanelLoginOrRegister.Controls.Add(this.ButtonRegister);
-            this.PanelLoginOrRegister.Controls.Add(this.ButtonLogin);
-            this.PanelLoginOrRegister.Controls.Add(this.LabelLoginOrRegister);
-            this.PanelLoginOrRegister.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.PanelLoginOrRegister.Location = new System.Drawing.Point(0, 0);
-            this.PanelLoginOrRegister.Name = "PanelLoginOrRegister";
-            this.PanelLoginOrRegister.Size = new System.Drawing.Size(814, 25);
-            this.PanelLoginOrRegister.TabIndex = 121;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(724, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(12, 12);
-            this.pictureBox1.TabIndex = 121;
-            this.pictureBox1.TabStop = false;
-            // 
-            // ButtonAdmin
-            // 
-            this.ButtonAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.ButtonAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ButtonAdmin.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.ButtonAdmin.FlatAppearance.BorderSize = 0;
-            this.ButtonAdmin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.ButtonAdmin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.ButtonAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
-            this.ButtonAdmin.ForeColor = System.Drawing.Color.White;
-            this.ButtonAdmin.Location = new System.Drawing.Point(716, 0);
-            this.ButtonAdmin.Name = "ButtonAdmin";
-            this.ButtonAdmin.Size = new System.Drawing.Size(94, 25);
-            this.ButtonAdmin.TabIndex = 120;
-            this.ButtonAdmin.TabStop = false;
-            this.ButtonAdmin.Text = "Administração";
-            this.ButtonAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ButtonAdmin.UseVisualStyleBackColor = false;
-            this.ButtonAdmin.Click += new System.EventHandler(this.ButtonAdmin_Click);
-            // 
-            // PictureBoxRegister
-            // 
-            this.PictureBoxRegister.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxRegister.Image")));
-            this.PictureBoxRegister.Location = new System.Drawing.Point(122, 7);
-            this.PictureBoxRegister.Name = "PictureBoxRegister";
-            this.PictureBoxRegister.Size = new System.Drawing.Size(12, 12);
-            this.PictureBoxRegister.TabIndex = 119;
-            this.PictureBoxRegister.TabStop = false;
-            // 
-            // PictureBoxLogin
-            // 
-            this.PictureBoxLogin.BackColor = System.Drawing.Color.Transparent;
-            this.PictureBoxLogin.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxLogin.Image")));
-            this.PictureBoxLogin.Location = new System.Drawing.Point(7, 6);
-            this.PictureBoxLogin.Name = "PictureBoxLogin";
-            this.PictureBoxLogin.Size = new System.Drawing.Size(12, 12);
-            this.PictureBoxLogin.TabIndex = 115;
-            this.PictureBoxLogin.TabStop = false;
-            // 
-            // ButtonRegister
-            // 
-            this.ButtonRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.ButtonRegister.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ButtonRegister.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.ButtonRegister.FlatAppearance.BorderSize = 0;
-            this.ButtonRegister.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.ButtonRegister.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.ButtonRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
-            this.ButtonRegister.ForeColor = System.Drawing.Color.White;
-            this.ButtonRegister.Location = new System.Drawing.Point(116, 0);
-            this.ButtonRegister.Name = "ButtonRegister";
-            this.ButtonRegister.Size = new System.Drawing.Size(81, 25);
-            this.ButtonRegister.TabIndex = 117;
-            this.ButtonRegister.TabStop = false;
-            this.ButtonRegister.Text = "Registre-se";
-            this.ButtonRegister.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ButtonRegister.UseVisualStyleBackColor = false;
-            this.ButtonRegister.Click += new System.EventHandler(this.ButtonRegister_Click);
-            // 
-            // ButtonLogin
-            // 
-            this.ButtonLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
-            this.ButtonLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ButtonLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.ButtonLogin.FlatAppearance.BorderSize = 0;
-            this.ButtonLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.ButtonLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.ButtonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ButtonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
-            this.ButtonLogin.ForeColor = System.Drawing.Color.White;
-            this.ButtonLogin.Location = new System.Drawing.Point(0, 0);
-            this.ButtonLogin.Name = "ButtonLogin";
-            this.ButtonLogin.Size = new System.Drawing.Size(92, 25);
-            this.ButtonLogin.TabIndex = 115;
-            this.ButtonLogin.TabStop = false;
-            this.ButtonLogin.Text = "Autentique-se";
-            this.ButtonLogin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.ButtonLogin.UseVisualStyleBackColor = false;
-            this.ButtonLogin.Click += new System.EventHandler(this.ButtonLogin_Click);
-            // 
-            // LabelLoginOrRegister
-            // 
-            this.LabelLoginOrRegister.AutoSize = true;
-            this.LabelLoginOrRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
-            this.LabelLoginOrRegister.ForeColor = System.Drawing.Color.White;
-            this.LabelLoginOrRegister.Location = new System.Drawing.Point(96, 6);
-            this.LabelLoginOrRegister.Name = "LabelLoginOrRegister";
-            this.LabelLoginOrRegister.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.LabelLoginOrRegister.Size = new System.Drawing.Size(15, 12);
-            this.LabelLoginOrRegister.TabIndex = 116;
-            this.LabelLoginOrRegister.Text = "ou";
             // 
             // ButtonLogout
             // 
@@ -286,6 +167,125 @@
             this.LabelWelcome.Text = "Bem-vindo Usuário!";
             this.LabelWelcome.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // LabelLoginOrRegister
+            // 
+            this.LabelLoginOrRegister.AutoSize = true;
+            this.LabelLoginOrRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.LabelLoginOrRegister.ForeColor = System.Drawing.Color.White;
+            this.LabelLoginOrRegister.Location = new System.Drawing.Point(96, 6);
+            this.LabelLoginOrRegister.Name = "LabelLoginOrRegister";
+            this.LabelLoginOrRegister.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.LabelLoginOrRegister.Size = new System.Drawing.Size(15, 12);
+            this.LabelLoginOrRegister.TabIndex = 116;
+            this.LabelLoginOrRegister.Text = "ou";
+            // 
+            // ButtonLogin
+            // 
+            this.ButtonLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.ButtonLogin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonLogin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ButtonLogin.FlatAppearance.BorderSize = 0;
+            this.ButtonLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.ButtonLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.ButtonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.ButtonLogin.ForeColor = System.Drawing.Color.White;
+            this.ButtonLogin.Location = new System.Drawing.Point(0, 0);
+            this.ButtonLogin.Name = "ButtonLogin";
+            this.ButtonLogin.Size = new System.Drawing.Size(92, 25);
+            this.ButtonLogin.TabIndex = 115;
+            this.ButtonLogin.TabStop = false;
+            this.ButtonLogin.Text = "Autentique-se";
+            this.ButtonLogin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ButtonLogin.UseVisualStyleBackColor = false;
+            this.ButtonLogin.Click += new System.EventHandler(this.ButtonLogin_Click);
+            // 
+            // ButtonRegister
+            // 
+            this.ButtonRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.ButtonRegister.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonRegister.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ButtonRegister.FlatAppearance.BorderSize = 0;
+            this.ButtonRegister.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.ButtonRegister.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.ButtonRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.ButtonRegister.ForeColor = System.Drawing.Color.White;
+            this.ButtonRegister.Location = new System.Drawing.Point(116, 0);
+            this.ButtonRegister.Name = "ButtonRegister";
+            this.ButtonRegister.Size = new System.Drawing.Size(81, 25);
+            this.ButtonRegister.TabIndex = 117;
+            this.ButtonRegister.TabStop = false;
+            this.ButtonRegister.Text = "Registre-se";
+            this.ButtonRegister.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ButtonRegister.UseVisualStyleBackColor = false;
+            this.ButtonRegister.Click += new System.EventHandler(this.ButtonRegister_Click);
+            // 
+            // PictureBoxLogin
+            // 
+            this.PictureBoxLogin.BackColor = System.Drawing.Color.Transparent;
+            this.PictureBoxLogin.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxLogin.Image")));
+            this.PictureBoxLogin.Location = new System.Drawing.Point(7, 6);
+            this.PictureBoxLogin.Name = "PictureBoxLogin";
+            this.PictureBoxLogin.Size = new System.Drawing.Size(12, 12);
+            this.PictureBoxLogin.TabIndex = 115;
+            this.PictureBoxLogin.TabStop = false;
+            // 
+            // PictureBoxRegister
+            // 
+            this.PictureBoxRegister.Image = ((System.Drawing.Image)(resources.GetObject("PictureBoxRegister.Image")));
+            this.PictureBoxRegister.Location = new System.Drawing.Point(122, 7);
+            this.PictureBoxRegister.Name = "PictureBoxRegister";
+            this.PictureBoxRegister.Size = new System.Drawing.Size(12, 12);
+            this.PictureBoxRegister.TabIndex = 119;
+            this.PictureBoxRegister.TabStop = false;
+            // 
+            // ButtonAdmin
+            // 
+            this.ButtonAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.ButtonAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonAdmin.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.ButtonAdmin.FlatAppearance.BorderSize = 0;
+            this.ButtonAdmin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.ButtonAdmin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.ButtonAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F);
+            this.ButtonAdmin.ForeColor = System.Drawing.Color.White;
+            this.ButtonAdmin.Location = new System.Drawing.Point(716, 0);
+            this.ButtonAdmin.Name = "ButtonAdmin";
+            this.ButtonAdmin.Size = new System.Drawing.Size(94, 25);
+            this.ButtonAdmin.TabIndex = 120;
+            this.ButtonAdmin.TabStop = false;
+            this.ButtonAdmin.Text = "Administração";
+            this.ButtonAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.ButtonAdmin.UseVisualStyleBackColor = false;
+            this.ButtonAdmin.Click += new System.EventHandler(this.ButtonAdmin_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(724, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(12, 12);
+            this.pictureBox1.TabIndex = 121;
+            this.pictureBox1.TabStop = false;
+            // 
+            // PanelLoginOrRegister
+            // 
+            this.PanelLoginOrRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(41)))), ((int)(((byte)(41)))));
+            this.PanelLoginOrRegister.Controls.Add(this.pictureBox1);
+            this.PanelLoginOrRegister.Controls.Add(this.ButtonAdmin);
+            this.PanelLoginOrRegister.Controls.Add(this.PictureBoxRegister);
+            this.PanelLoginOrRegister.Controls.Add(this.PictureBoxLogin);
+            this.PanelLoginOrRegister.Controls.Add(this.ButtonRegister);
+            this.PanelLoginOrRegister.Controls.Add(this.ButtonLogin);
+            this.PanelLoginOrRegister.Controls.Add(this.LabelLoginOrRegister);
+            this.PanelLoginOrRegister.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.PanelLoginOrRegister.Location = new System.Drawing.Point(0, 0);
+            this.PanelLoginOrRegister.Name = "PanelLoginOrRegister";
+            this.PanelLoginOrRegister.Size = new System.Drawing.Size(814, 25);
+            this.PanelLoginOrRegister.TabIndex = 121;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,27 +295,20 @@
             this.Name = "MainMenu";
             this.Size = new System.Drawing.Size(814, 25);
             this.Load += new System.EventHandler(this.MainMenu_Load);
-            this.PanelLoginOrRegister.ResumeLayout(false);
-            this.PanelLoginOrRegister.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRegister)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogin)).EndInit();
             this.PanelProfile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrders)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxProfile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRegister)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.PanelLoginOrRegister.ResumeLayout(false);
+            this.PanelLoginOrRegister.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        public System.Windows.Forms.Panel PanelLoginOrRegister;
-        private System.Windows.Forms.PictureBox PictureBoxRegister;
-        private System.Windows.Forms.PictureBox PictureBoxLogin;
-        public System.Windows.Forms.Button ButtonRegister;
-        public System.Windows.Forms.Button ButtonLogin;
-        public System.Windows.Forms.Label LabelLoginOrRegister;
         private System.Windows.Forms.Button ButtonLogout;
         public System.Windows.Forms.Panel PanelProfile;
         private System.Windows.Forms.PictureBox PictureBoxLogout;
@@ -324,7 +317,13 @@
         private System.Windows.Forms.PictureBox PictureBoxProfile;
         private System.Windows.Forms.Button ButtonProfile;
         public System.Windows.Forms.Label LabelWelcome;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Label LabelLoginOrRegister;
+        public System.Windows.Forms.Button ButtonLogin;
+        public System.Windows.Forms.Button ButtonRegister;
+        private System.Windows.Forms.PictureBox PictureBoxLogin;
+        private System.Windows.Forms.PictureBox PictureBoxRegister;
         public System.Windows.Forms.Button ButtonAdmin;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Panel PanelLoginOrRegister;
     }
 }

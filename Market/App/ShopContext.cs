@@ -23,6 +23,11 @@ namespace Shop.App {
             set;
         }
 
+        public DbSet<Manager> Managers {
+            get;
+            set;
+        }
+
         public DbSet<Category> Categories {
             get;
             set;

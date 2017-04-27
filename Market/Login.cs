@@ -64,7 +64,7 @@ namespace Shop {
 
                 Customer customer = DAO.Customers.FindOneByLogin(TextBoxUsername.Text, TextBoxPassword.Text);
 
-                if (customer != null && customer is Customer) {
+                if (customer != null) {
 
                     Session.Login(customer);
                     Main.Menu.Customer = (Customer)Session.User;

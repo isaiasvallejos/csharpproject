@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
 using Shop.Models;
+using Shop.App;
 
 namespace Shop {
 
@@ -173,6 +174,7 @@ namespace Shop {
             Customer.Address.City = ComboBoxAddressCity.GetItemText(ComboBoxAddressCity.SelectedItem);
             Customer.Address.State = ComboBoxAddressState.GetItemText(ComboBoxAddressState.SelectedItem);
 
+            Customer.Enabled = true;
             Customer.CreatedAt = DateTime.Now;
             Customer.UpdatedAt = DateTime.Now;
 
@@ -181,6 +183,8 @@ namespace Shop {
                 DAO.Customers.Add(Customer);
                 MessageBox.Show("Bem-vindo " + Customer.Name + "!", "", MessageBoxButtons.OK);
 
+                Session.Login(Customer);
+                                
                 Main.Menu.Customer = Customer;
                 Main.Menu.UpdateView();
 

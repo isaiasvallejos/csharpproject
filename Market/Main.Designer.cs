@@ -32,13 +32,13 @@
             this.ComboBoxOrderBy = new System.Windows.Forms.ComboBox();
             this.LabelOrderBy = new System.Windows.Forms.Label();
             this.PanelSearch = new System.Windows.Forms.Panel();
+            this.TextBoxSearch = new Shop.Components.TextBoxPlaceHolder();
             this.LabelSearch = new System.Windows.Forms.Label();
             this.PictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.GroupBoxFooter = new System.Windows.Forms.GroupBox();
             this.Menu = new Shop.Components.MainMenu();
             this.CartPanel = new Shop.Components.CartPanel();
             this.ProductBox = new Shop.Components.ProductBox();
-            this.TextBoxSearch = new Shop.Components.TextBoxPlaceHolder();
             this.PanelSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).BeginInit();
             this.SuspendLayout();
@@ -78,6 +78,19 @@
             this.PanelSearch.Name = "PanelSearch";
             this.PanelSearch.Size = new System.Drawing.Size(192, 23);
             this.PanelSearch.TabIndex = 10;
+            // 
+            // TextBoxSearch
+            // 
+            this.TextBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBoxSearch.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.TextBoxSearch.IsPassword = false;
+            this.TextBoxSearch.Location = new System.Drawing.Point(5, 5);
+            this.TextBoxSearch.Name = "TextBoxSearch";
+            this.TextBoxSearch.PlaceHolderText = "Nome de produto ou categoria...";
+            this.TextBoxSearch.Size = new System.Drawing.Size(183, 13);
+            this.TextBoxSearch.TabIndex = 114;
+            this.TextBoxSearch.Text = "Nome de produto ou categoria...";
+            this.TextBoxSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxSearch_KeyDown);
             // 
             // LabelSearch
             // 
@@ -126,23 +139,10 @@
             // 
             this.ProductBox.AutoScroll = true;
             this.ProductBox.BackColor = System.Drawing.Color.Transparent;
-            this.ProductBox.Location = new System.Drawing.Point(12, 167);
+            this.ProductBox.Location = new System.Drawing.Point(12, 166);
             this.ProductBox.Name = "ProductBox";
-            this.ProductBox.Size = new System.Drawing.Size(550, 511);
+            this.ProductBox.Size = new System.Drawing.Size(550, 512);
             this.ProductBox.TabIndex = 110;
-            // 
-            // TextBoxSearch
-            // 
-            this.TextBoxSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.TextBoxSearch.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.TextBoxSearch.IsPassword = false;
-            this.TextBoxSearch.Location = new System.Drawing.Point(5, 5);
-            this.TextBoxSearch.Name = "TextBoxSearch";
-            this.TextBoxSearch.PlaceHolderText = "Nome de produto ou categoria...";
-            this.TextBoxSearch.Size = new System.Drawing.Size(183, 13);
-            this.TextBoxSearch.TabIndex = 114;
-            this.TextBoxSearch.Text = "Nome de produto ou categoria...";
-            this.TextBoxSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxSearch_KeyDown);
             // 
             // FormMain
             // 
@@ -167,6 +167,7 @@
             this.Text = "Prophet Shop";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
             this.PanelSearch.ResumeLayout(false);
             this.PanelSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLogo)).EndInit();

@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             this.LabelNameHeader = new System.Windows.Forms.Label();
-            this.LabelOrderBy = new System.Windows.Forms.Label();
+            this.LabelFilterStatus = new System.Windows.Forms.Label();
             this.ComboBoxFilterStatus = new Shop.Components.ComboBoxPlaceHolder();
             this.OrderBox = new Shop.Components.OrderBox();
             this.SuspendLayout();
@@ -39,14 +39,14 @@
             this.LabelNameHeader.TabIndex = 3;
             this.LabelNameHeader.Text = "Pedidos";
             // 
-            // LabelOrderBy
+            // LabelFilterStatus
             // 
-            this.LabelOrderBy.AutoSize = true;
-            this.LabelOrderBy.Location = new System.Drawing.Point(8, 78);
-            this.LabelOrderBy.Name = "LabelOrderBy";
-            this.LabelOrderBy.Size = new System.Drawing.Size(50, 13);
-            this.LabelOrderBy.TabIndex = 100;
-            this.LabelOrderBy.Text = "Filtrar por";
+            this.LabelFilterStatus.AutoSize = true;
+            this.LabelFilterStatus.Location = new System.Drawing.Point(8, 78);
+            this.LabelFilterStatus.Name = "LabelFilterStatus";
+            this.LabelFilterStatus.Size = new System.Drawing.Size(50, 13);
+            this.LabelFilterStatus.TabIndex = 100;
+            this.LabelFilterStatus.Text = "Filtrar por";
             // 
             // ComboBoxFilterStatus
             // 
@@ -54,6 +54,7 @@
             this.ComboBoxFilterStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ComboBoxFilterStatus.FormattingEnabled = true;
             this.ComboBoxFilterStatus.Items.AddRange(new object[] {
+            "Todos",
             "Pendente",
             "Aprovado",
             "Entregue",
@@ -80,7 +81,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(487, 354);
             this.Controls.Add(this.ComboBoxFilterStatus);
-            this.Controls.Add(this.LabelOrderBy);
+            this.Controls.Add(this.LabelFilterStatus);
             this.Controls.Add(this.LabelNameHeader);
             this.Controls.Add(this.OrderBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -100,7 +101,7 @@
 
         private Components.OrderBox OrderBox;
         private System.Windows.Forms.Label LabelNameHeader;
-        private System.Windows.Forms.Label LabelOrderBy;
+        private System.Windows.Forms.Label LabelFilterStatus;
         private Components.ComboBoxPlaceHolder ComboBoxFilterStatus;
     }
 }

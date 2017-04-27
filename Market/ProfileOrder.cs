@@ -32,22 +32,26 @@ namespace Shop {
 
             OrderBox.Focus();
 
-            if (ComboBoxFilterStatus.SelectedIndex == 0)
-            {
-                OrderBox.Orders = (Session.User as Customer).Orders.Where(order => order.Status.Equals("Pendente")).ToList();
+            if (ComboBoxFilterStatus.SelectedIndex == 0) {
+                OrderBox.Orders = (Session.User as Customer).Orders.OrderByDescending(order => order.UpdatedAt).ToList();
             }
 
             if (ComboBoxFilterStatus.SelectedIndex == 1)
             {
-                OrderBox.Orders = (Session.User as Customer).Orders.Where(order => order.Status.Equals("Aprovado")).ToList();
+                OrderBox.Orders = (Session.User as Customer).Orders.Where(order => order.Status.Equals("Pendente")).ToList();
             }
 
             if (ComboBoxFilterStatus.SelectedIndex == 2)
             {
-                OrderBox.Orders = (Session.User as Customer).Orders.Where(order => order.Status.Equals("Entregue")).ToList();
+                OrderBox.Orders = (Session.User as Customer).Orders.Where(order => order.Status.Equals("Aprovado")).ToList();
             }
 
             if (ComboBoxFilterStatus.SelectedIndex == 3)
+            {
+                OrderBox.Orders = (Session.User as Customer).Orders.Where(order => order.Status.Equals("Entregue")).ToList();
+            }
+
+            if (ComboBoxFilterStatus.SelectedIndex == 4)
             {
                 OrderBox.Orders = (Session.User as Customer).Orders.Where(order => order.Status.Equals("Cancelado")).ToList();
             }

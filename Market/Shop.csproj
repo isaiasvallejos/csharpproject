@@ -165,12 +165,25 @@
       <DependentUpon>TextBoxPlaceHolder.cs</DependentUpon>
     </Compile>
     <Compile Include="DAO\Cities.cs" />
+    <Compile Include="DAO\Managers.cs" />
     <Compile Include="DAO\Orders.cs" />
     <Compile Include="DAO\OrderProducts.cs" />
     <Compile Include="DAO\Products.cs" />
     <Compile Include="DAO\Categories.cs" />
     <Compile Include="DAO\Customers.cs" />
     <Compile Include="DAO\States.cs" />
+    <Compile Include="Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginAdmin.Designer.cs">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,17 +207,47 @@
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="Product\Save.cs">
+    <Compile Include="OrderDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Product\Save.Designer.cs">
-      <DependentUpon>Save.cs</DependentUpon>
+    <Compile Include="OrderDetail.Designer.cs">
+      <DependentUpon>OrderDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="Product\Buy.cs">
+    <Compile Include="Customers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Product\Buy.Designer.cs">
-      <DependentUpon>Buy.cs</DependentUpon>
+    <Compile Include="Customers.Designer.cs">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Products.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products.Designer.cs">
+      <DependentUpon>Products.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Orders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Orders.Designer.cs">
+      <DependentUpon>Orders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductSave.Designer.cs">
+      <DependentUpon>ProductSave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProductBuy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProductBuy.Designer.cs">
+      <DependentUpon>ProductBuy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerDetail.Designer.cs">
+      <DependentUpon>CustomerDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Profile.cs">
       <SubType>Form</SubType>
@@ -225,6 +268,12 @@
     </Compile>
     <Compile Include="Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Start.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Start.Designer.cs">
+      <DependentUpon>Start.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\Encryptor.cs" />
     <Compile Include="Util\ImageConverter.cs" />
@@ -268,17 +317,38 @@
     <EmbeddedResource Include="Components\TextBoxPlaceHolder.resx">
       <DependentUpon>TextBoxPlaceHolder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginAdmin.resx">
+      <DependentUpon>LoginAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Product\Save.resx">
-      <DependentUpon>Save.cs</DependentUpon>
+    <EmbeddedResource Include="OrderDetail.resx">
+      <DependentUpon>OrderDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Product\Buy.resx">
-      <DependentUpon>Buy.cs</DependentUpon>
+    <EmbeddedResource Include="Customers.resx">
+      <DependentUpon>Customers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products.resx">
+      <DependentUpon>Products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Orders.resx">
+      <DependentUpon>Orders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductSave.resx">
+      <DependentUpon>ProductSave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductBuy.resx">
+      <DependentUpon>ProductBuy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerDetail.resx">
+      <DependentUpon>CustomerDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Profile.resx">
       <DependentUpon>Profile.cs</DependentUpon>
@@ -298,6 +368,9 @@
     </Compile>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Start.resx">
+      <DependentUpon>Start.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
